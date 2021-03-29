@@ -27,7 +27,6 @@ public class OrderUserInterface {
     public String getFurnitureType(){
         return furnitureType;
     }
-
     public int getNumberItems() {
         return numberItems;
     }
