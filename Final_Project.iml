@@ -5,7 +5,48 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="15" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://C:/JDBC/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/build/java" />
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/demo/java" />
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/generated/java" />
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/legacy/java" />
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/main/core-api/java" />
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/main/core-impl/java" />
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/main/protocol-impl/java" />
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/main/user-api/java" />
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/main/user-impl/java" />
+          <root url="file://C:/JDBC/lib/mysql-connector-java-8.0.23/src/test/java" />
+          <root url="file://C:/JDBC/lib/src/build/java" />
+          <root url="file://C:/JDBC/lib/src/demo/java" />
+          <root url="file://C:/JDBC/lib/src/generated/java" />
+          <root url="file://C:/JDBC/lib/src/legacy/java" />
+          <root url="file://C:/JDBC/lib/src/main/core-api/java" />
+          <root url="file://C:/JDBC/lib/src/main/core-impl/java" />
+          <root url="file://C:/JDBC/lib/src/main/protocol-impl/java" />
+          <root url="file://C:/JDBC/lib/src/main/user-api/java" />
+          <root url="file://C:/JDBC/lib/src/main/user-impl/java" />
+          <root url="file://C:/JDBC/lib/src/test/java" />
+        </SOURCES>
+        <jarDirectory url="file://C:/JDBC/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://C:/JUNIT" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://C:/JUNIT" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
