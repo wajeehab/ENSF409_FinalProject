@@ -13,11 +13,9 @@ public class Chair {
     private ArrayList<String> hasCushions = new ArrayList<>();
     private ArrayList<Integer> totalPrice = new ArrayList<>();
     private ArrayList<List<String>> combinations = new ArrayList<>();
+    private int smallest;
 
-
-    public Chair() {
-        database.Initiazlize();
-    }
+    public Chair() { database.Initialize(); }
 
     public void selectChairInfo(String type) {
         List<List<String>> legs = new ArrayList<>();
@@ -139,5 +137,23 @@ public class Chair {
             totalPrice.add((sum));
         }
         System.out.println(totalPrice);
+        findCheapest();
     }
+
+    public void findCheapest(){
+        smallest = totalPrice.get(0);
+        int sIndex = 0;
+        for (int i =0; i< totalPrice.size();i++){
+            if(totalPrice.get(i)<smallest){
+                smallest = totalPrice.get(i);
+                sIndex = i;
+            }
+        }
+    }
+
+    public int getSmallest(){
+        return smallest;
+    }
+
+
 }

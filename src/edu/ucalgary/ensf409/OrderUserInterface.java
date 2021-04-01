@@ -1,6 +1,5 @@
 package edu.ucalgary.ensf409;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class OrderUserInterface {
@@ -8,6 +7,7 @@ public class OrderUserInterface {
     public String furnitureType;
     public int numberItems;
     public Chair chair = new Chair();
+    public TextFile text = new TextFile();
 
     public OrderUserInterface(){
         Scanner reader = new Scanner(System.in);  // Reading from System.in
@@ -23,9 +23,10 @@ public class OrderUserInterface {
         reader.close();
     }
 
-    public void selectFurnitureCategory() throws SQLException {
+    public void selectFurnitureCategory(){
         if (getFurnitureCategory().equals("chair") | (getFurnitureCategory().equals("Chair"))){
             chair.selectChairInfo(getFurnitureType());
+            text.WriteFile(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest());
         }
 
 //        else if(getFurnitureCategory().equals("desk") | (getFurnitureCategory().equals("Desk"))){

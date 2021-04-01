@@ -3,9 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class TextFile {
-    public TextFile(){};
+    public TextFile(){}
 
-    public void WriteFile(String type, String category, String amount, String price, String ID){
+    public void WriteFile(String type, String category, int amount, int price){
         try {
             FileWriter myWriter = new FileWriter("orderform.txt");
             myWriter.write("Furniture Order Form");
@@ -18,7 +18,16 @@ public class TextFile {
             myWriter.write("Date");
             myWriter.write("\n");
             myWriter.write("\n");
-            myWriter.write("Original Request: " );
+            myWriter.write("Original Request: " + type + " " + category + "," + " "+ amount);
+            myWriter.write("\n");
+            myWriter.write("\n");
+            myWriter.write("Items Ordered");
+            myWriter.write("\n");
+            myWriter.write("ID: ");
+            myWriter.write("\n");
+            myWriter.write("\n");
+            myWriter.write("Total Price: " + "$" + price);
+
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
