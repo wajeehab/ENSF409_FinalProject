@@ -155,5 +155,9 @@ public class Chair {
         return smallest;
     }
 
+//What needs to be added?
+    //delete from database the ID's which are used
+    //how to handle orders which cannot be fulfilled
+    //how to handle more than 1 order
 
 }
