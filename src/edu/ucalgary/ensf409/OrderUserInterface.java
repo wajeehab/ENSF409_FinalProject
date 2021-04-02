@@ -44,9 +44,10 @@ public class OrderUserInterface {
         else if(getFurnitureCategory().equals("lamp") | (getFurnitureCategory().equals("Lamp"))){
             lamp.selectLampInfo(getFurnitureType());
             text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo());
+            update.deleteLampFromDataBase(lamp.getIdCombo());
         }
         else {
-            throw new IllegalArgumentException("Illegal input");
+            throw new IllegalArgumentException("Order Input Invalid");
         }
     }
 
