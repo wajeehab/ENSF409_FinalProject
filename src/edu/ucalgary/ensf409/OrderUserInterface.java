@@ -23,10 +23,12 @@ public class OrderUserInterface {
         reader.close();
     }
 
-    public void selectFurnitureCategory(){
-        if (getFurnitureCategory().equals("chair") | (getFurnitureCategory().equals("Chair"))){
-            chair.selectChairInfo(getFurnitureType());
-            text.WriteFile(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest());
+    public void selectFurnitureCategory() throws Exception {
+        if (getFurnitureCategory().equals("chair") | (getFurnitureCategory().equals("Chair"))) {
+            for (int i = getNumberItems(); i> 0 ;i--){
+                chair.selectChairInfo(getFurnitureType());
+//                    text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest());
+            }
         }
 
 //        else if(getFurnitureCategory().equals("desk") | (getFurnitureCategory().equals("Desk"))){

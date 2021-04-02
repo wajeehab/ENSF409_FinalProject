@@ -1,9 +1,7 @@
 package edu.ucalgary.ensf409;
 
-import java.sql.SQLException;
-
 public class Main {
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         OrderUserInterface order = new OrderUserInterface();
         order.selectFurnitureCategory();
     }

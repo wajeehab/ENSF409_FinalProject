@@ -1,31 +1,36 @@
 package edu.ucalgary.ensf409;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
 
 public class Chair {
     private final InitializeConnection database = new InitializeConnection();
-    private ArrayList<String> hasLegs = new ArrayList<>();
-    private ArrayList<String> hasArms = new ArrayList<>();
-    private ArrayList<String> hasSeats = new ArrayList<>();
-    private ArrayList<String> hasCushions = new ArrayList<>();
-    private ArrayList<Integer> totalPrice = new ArrayList<>();
-    private ArrayList<List<String>> combinations = new ArrayList<>();
+    private ArrayList<String> hasLegs;
+    private ArrayList<String> hasArms;
+    private ArrayList<String> hasSeats;
+    private ArrayList<String> hasCushions;
+    private ArrayList<Integer> totalPrice;
+    private ArrayList<List<String>> combinations;
+    private ResultSet results;
+    private Connection dbConnect;
     private int smallest;
+    private int sIndex;
 
-    public Chair() { database.Initialize(); }
+    public Chair() {
+        database.Initialize();
+        dbConnect = database.getDbConnect();
+    }
 
     public void selectChairInfo(String type) {
+        System.out.println("Starting");
         List<List<String>> legs = new ArrayList<>();
         List<List<String>> arms = new ArrayList<>();
         List<List<String>> seat = new ArrayList<>();
         List<List<String>> cushion = new ArrayList<>();
 
         try {
-            Statement myStmt = database.getDbConnect().createStatement();
-            ResultSet results = myStmt.executeQuery("SELECT * FROM  CHAIR  WHERE Type = '" + type + "'");
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT * FROM  CHAIR  WHERE Type = '" + type + "'");
             int i = 0;
             while (results.next()) {
                 legs.add(i, new ArrayList<>());
@@ -46,35 +51,54 @@ public class Chair {
                 cushion.get(i).add(1, results.getString("ID"));
 
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         createHasArrays(legs, arms, seat, cushion);
-        createCombinations();
+        boolean isEmpty = checkEmpty();
+        if(isEmpty){
+            OrderNotFulfilled order1 = new OrderNotFulfilled();
+            order1.message();
+            System.exit(1);
+        }
+        else if (!isEmpty){
+            createCombinations();
+        }
     }
 
 
     public void createHasArrays(List<List<String>> legs, List<List<String>> arms, List<List<String>> seat, List<List<String>> cushion) {
-        for (int i = 0; i < legs.size(); i++) {
-            if (legs.get(i).get(0).equals("Y")) {
-                hasLegs.add((legs.get(i).get(1)));
+        hasLegs = new ArrayList<>();
+        hasArms = new ArrayList<>();
+        hasSeats = new ArrayList<>();
+        hasCushions = new ArrayList<>();
+
+            for (int i = 0; i < legs.size(); i++) {
+                if (legs.get(i).get(0).equals("Y")) {
+                    hasLegs.add((legs.get(i).get(1)));
+                }
             }
-        }
-        for (int i = 0; i < arms.size(); i++) {
-            if (arms.get(i).get(0).equals("Y")) {
-                hasArms.add((arms.get(i).get(1)));
+            for (int i = 0; i < arms.size(); i++) {
+                if (arms.get(i).get(0).equals("Y")) {
+                    hasArms.add((arms.get(i).get(1)));
+                }
             }
-        }
-        for (int i = 0; i < seat.size(); i++) {
-            if (seat.get(i).get(0).equals("Y")) {
-                hasSeats.add((seat.get(i).get(1)));
+            for (int i = 0; i < seat.size(); i++) {
+                if (seat.get(i).get(0).equals("Y")) {
+                    hasSeats.add((seat.get(i).get(1)));
+                }
             }
-        }
-        for (int i = 0; i < cushion.size(); i++) {
-            if (cushion.get(i).get(0).equals("Y")) {
-                hasCushions.add((legs.get(i).get(1)));
+            for (int i = 0; i < cushion.size(); i++) {
+                if (cushion.get(i).get(0).equals("Y")) {
+                    hasCushions.add((legs.get(i).get(1)));
+                }
             }
-        }
+
+    }
+
+    public boolean checkEmpty(){
+        return hasLegs.size() == 0 | hasArms.size() == 0 | hasCushions.size() == 0 | hasSeats.size() == 0;
     }
 
     public void createCombinations() {
@@ -94,6 +118,7 @@ public class Chair {
                 }
             }
         }
+        combinations = new ArrayList<>();
         for (int b = 0; b < result.size(); b++) {
             combinations.add(b, new ArrayList<>());
             for (int c = 0; c < result.get(b).size(); c++) {
@@ -102,24 +127,22 @@ public class Chair {
                 }
             }
         }
-        for(int a = 0; a< combinations.size();a++){
-            System.out.println(combinations.get(a));
-        }
         selectPrice();
     }
 
     public void selectPrice() {
       ArrayList<List<String>> price = new ArrayList<>();
         try {
-            Statement myStmt = database.getDbConnect().createStatement();
+            Statement myStmt = dbConnect.createStatement();
             for (int i = 0; i < combinations.size(); i++) {
                 price.add(i, new ArrayList<>());
                 for (int j = 0; j < combinations.get(i).size(); j++) {
-                    ResultSet results = myStmt.executeQuery("SELECT * FROM  CHAIR  WHERE ID = '" + combinations.get(i).get(j) + "'");
+                   results = myStmt.executeQuery("SELECT * FROM  CHAIR  WHERE ID = '" + combinations.get(i).get(j) + "'");
                     while (results.next()) {
                         price.get(i).add(results.getString("Price"));
                     }
                 }
+
             }
 
         } catch (SQLException throwables) {
@@ -129,6 +152,7 @@ public class Chair {
     }
 
     public void addPrice(ArrayList<List<String>> price){
+        totalPrice = new ArrayList<>();
         for(int a =0;a< price.size();a++){
             int sum =0;
             for(int b =0; b<price.get(a).size();b++){
@@ -136,24 +160,61 @@ public class Chair {
             }
             totalPrice.add((sum));
         }
-        System.out.println(totalPrice);
         findCheapest();
     }
 
     public void findCheapest(){
         smallest = totalPrice.get(0);
-        int sIndex = 0;
+        sIndex = 0;
         for (int i =0; i< totalPrice.size();i++){
             if(totalPrice.get(i)<smallest){
                 smallest = totalPrice.get(i);
                 sIndex = i;
             }
         }
+        deleteFromDataBase(combinations.get(sIndex));
     }
 
     public int getSmallest(){
         return smallest;
     }
+
+
+//    public void pickIDandPrice(){
+//
+//    }
+
+    public void deleteFromDataBase(List<String> idCombo){
+
+        try {
+            for(int i =0; i< idCombo.size();i++){
+                String query = "DELETE FROM CHAIR WHERE ID = ? ";
+                PreparedStatement myStmt = dbConnect.prepareStatement(query);
+
+                myStmt.setString(1, idCombo.get(i));
+
+                int rowCount = myStmt.executeUpdate();
+                System.out.println("Rows affected: " + rowCount);
+
+                myStmt.close();
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void close() {
+        try {
+            results.close();
+            dbConnect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 //What needs to be added?
     //delete from database the ID's which are used
