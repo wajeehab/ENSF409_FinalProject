@@ -4,9 +4,10 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: mesh chair, 1
+Original Request: desk lamp, 1
 
 Items Ordered
-ID: 
+ID: L649
+ID: L342
 
-Total Price: $0
+Total Price: $20

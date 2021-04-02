@@ -3,11 +3,14 @@ package edu.ucalgary.ensf409;
 import java.util.Scanner;
 
 public class OrderUserInterface {
-    public String furnitureCategory;
-    public String furnitureType;
-    public int numberItems;
-    public Chair chair = new Chair();
-    public TextFile text = new TextFile();
+    private String furnitureCategory;
+    private String furnitureType;
+    private int numberItems;
+    private Chair chair = new Chair();
+    private Lamp lamp = new Lamp();
+    private TextFile text = new TextFile();
+    private UpdateDatabase update = new UpdateDatabase();
+
 
     public OrderUserInterface(){
         Scanner reader = new Scanner(System.in);  // Reading from System.in
@@ -25,10 +28,9 @@ public class OrderUserInterface {
 
     public void selectFurnitureCategory() throws Exception {
         if (getFurnitureCategory().equals("chair") | (getFurnitureCategory().equals("Chair"))) {
-            for (int i = getNumberItems(); i> 0 ;i--){
                 chair.selectChairInfo(getFurnitureType());
-//                    text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest());
-            }
+                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest(), chair.getIdCombo());
+                update.deleteChairFromDataBase(chair.getIdCombo());
         }
 
 //        else if(getFurnitureCategory().equals("desk") | (getFurnitureCategory().equals("Desk"))){
@@ -39,9 +41,10 @@ public class OrderUserInterface {
 //            selectFilingInfo();
 //        }
 //
-//        else if(getFurnitureCategory().equals("lamp") | (getFurnitureCategory().equals("Lamp"))){
-//            selectLampInfo();
-//        }
+        else if(getFurnitureCategory().equals("lamp") | (getFurnitureCategory().equals("Lamp"))){
+            lamp.selectLampInfo(getFurnitureType());
+            text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo());
+        }
         else {
             throw new IllegalArgumentException("Illegal input");
         }

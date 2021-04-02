@@ -1,12 +1,13 @@
 package edu.ucalgary.ensf409;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class TextFile {
     public TextFile() {
     }
 
-    public void WriteOrderFulfilled(String type, String category, int amount, int price) {
+    public void WriteOrderFulfilled(String type, String category, int amount, int price, List<String> idCombo) {
         try {
             FileWriter myWriter = new FileWriter("orderform.txt");
             myWriter.write("Furniture Order Form");
@@ -24,8 +25,9 @@ public class TextFile {
             myWriter.write("\n");
             myWriter.write("Items Ordered");
             myWriter.write("\n");
-            myWriter.write("ID: ");
-            myWriter.write("\n");
+            for (int i =0;i<idCombo.size();i++) {
+                myWriter.write("ID: " + idCombo.get(i) + '\n');
+            }
             myWriter.write("\n");
             myWriter.write("Total Price: " + "$" + price);
 
@@ -37,7 +39,7 @@ public class TextFile {
         }
     }
 
-    public void WriteNotFulfilled(String type, String category, int amount, int price) {
+    public void WriteNotFulfilled(String type, String category, int amount, String manuNames) {
         try {
             FileWriter myWriter = new FileWriter("orderform.txt");
             myWriter.write("Furniture Order Form");

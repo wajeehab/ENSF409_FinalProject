@@ -172,7 +172,10 @@ public class Chair {
                 sIndex = i;
             }
         }
-        deleteFromDataBase(combinations.get(sIndex));
+    }
+
+    public List<String> getIdCombo(){
+        return combinations.get(sIndex);
     }
 
     public int getSmallest(){
@@ -180,30 +183,6 @@ public class Chair {
     }
 
 
-//    public void pickIDandPrice(){
-//
-//    }
-
-    public void deleteFromDataBase(List<String> idCombo){
-
-        try {
-            for(int i =0; i< idCombo.size();i++){
-                String query = "DELETE FROM CHAIR WHERE ID = ? ";
-                PreparedStatement myStmt = dbConnect.prepareStatement(query);
-
-                myStmt.setString(1, idCombo.get(i));
-
-                int rowCount = myStmt.executeUpdate();
-                System.out.println("Rows affected: " + rowCount);
-
-                myStmt.close();
-
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
     public void close() {
         try {
             results.close();
@@ -214,11 +193,7 @@ public class Chair {
     }
 
 
-
-
 //What needs to be added?
-    //delete from database the ID's which are used
-    //how to handle orders which cannot be fulfilled
     //how to handle more than 1 order
 
 }
