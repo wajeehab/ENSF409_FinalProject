@@ -52,4 +52,40 @@ public class UpdateDatabase {
             ex.printStackTrace();
         }
     }
+
+    public void deleteFilingFromDataBase(List<String> idCombo){
+        try {
+            for(int i =0; i< idCombo.size();i++){
+                String query = "DELETE FROM filing WHERE ID = ? ";
+                PreparedStatement myStmt = dbConnect.prepareStatement(query);
+
+                myStmt.setString(1, idCombo.get(i));
+
+                int rowCount = myStmt.executeUpdate();
+                System.out.println("Rows affected: " + rowCount);
+
+                myStmt.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void deleteDeskFromDataBase(List<String> idCombo){
+        try {
+            for(int i =0; i< idCombo.size();i++){
+                String query = "DELETE FROM desk WHERE ID = ? ";
+                PreparedStatement myStmt = dbConnect.prepareStatement(query);
+
+                myStmt.setString(1, idCombo.get(i));
+
+                int rowCount = myStmt.executeUpdate();
+                System.out.println("Rows affected: " + rowCount);
+
+                myStmt.close();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

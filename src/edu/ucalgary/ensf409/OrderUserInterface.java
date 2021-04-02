@@ -8,8 +8,11 @@ public class OrderUserInterface {
     private int numberItems;
     private Chair chair = new Chair();
     private Lamp lamp = new Lamp();
+    private Desk desk = new Desk();
+    private Filing filing = new Filing();
     private TextFile text = new TextFile();
     private UpdateDatabase update = new UpdateDatabase();
+    private OrderNotFulfilled orderN = new OrderNotFulfilled();
 
 
     public OrderUserInterface(){
@@ -26,11 +29,17 @@ public class OrderUserInterface {
         reader.close();
     }
 
-    public void selectFurnitureCategory() throws Exception {
+    public void selectFurnitureCategory(){
         if (getFurnitureCategory().equals("chair") | (getFurnitureCategory().equals("Chair"))) {
                 chair.selectChairInfo(getFurnitureType());
+            if(!chair.getIsEmpty()) {
                 text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest(), chair.getIdCombo());
                 update.deleteChairFromDataBase(chair.getIdCombo());
+            }
+            else if (chair.getIsEmpty()){
+                text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findChairManu());
+            }
+
         }
 
 //        else if(getFurnitureCategory().equals("desk") | (getFurnitureCategory().equals("Desk"))){
@@ -43,8 +52,14 @@ public class OrderUserInterface {
 //
         else if(getFurnitureCategory().equals("lamp") | (getFurnitureCategory().equals("Lamp"))){
             lamp.selectLampInfo(getFurnitureType());
-            text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo());
-            update.deleteLampFromDataBase(lamp.getIdCombo());
+            if(!lamp.getIsEmpty()) {
+                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo());
+                update.deleteLampFromDataBase(lamp.getIdCombo());
+            }
+            else if (lamp.getIsEmpty()){
+                text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findLampManu());
+            }
+
         }
         else {
             throw new IllegalArgumentException("Order Input Invalid");

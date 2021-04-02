@@ -15,6 +15,7 @@ public class Chair {
     private Connection dbConnect;
     private int smallest;
     private int sIndex;
+    private boolean isEmpty;
 
     public Chair() {
         database.Initialize();
@@ -56,13 +57,8 @@ public class Chair {
             throwables.printStackTrace();
         }
         createHasArrays(legs, arms, seat, cushion);
-        boolean isEmpty = checkEmpty();
-        if(isEmpty){
-            OrderNotFulfilled order1 = new OrderNotFulfilled();
-            order1.message();
-            System.exit(1);
-        }
-        else if (!isEmpty){
+        isEmpty = checkEmpty();
+        if (!isEmpty){
             createCombinations();
         }
     }
@@ -190,6 +186,10 @@ public class Chair {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean getIsEmpty() {
+        return isEmpty;
     }
 
 

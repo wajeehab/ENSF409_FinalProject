@@ -17,6 +17,7 @@ public class Lamp {
     private Connection dbConnect;
     private int smallest;
     private int sIndex;
+    private boolean isEmpty;
 
     public Lamp() {
         database.Initialize();
@@ -47,18 +48,20 @@ public class Lamp {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        System.out.println(base);
+        System.out.println(bulb);
+
+
         createHasArrays(base, bulb);
-        boolean isEmpty = checkEmpty();
-        if(isEmpty){
-            OrderNotFulfilled order1 = new OrderNotFulfilled();
-            order1.message();
-            System.exit(1);
-        }
-        else if (!isEmpty){
+        isEmpty = checkEmpty();
+        if (!isEmpty){
             createCombinations();
         }
     }
 
+    public boolean getIsEmpty(){
+        return isEmpty;
+    }
 
     public void createHasArrays(List<List<String>> base, List<List<String>> bulb) {
         hasBase = new ArrayList<>();

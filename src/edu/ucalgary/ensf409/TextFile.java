@@ -55,9 +55,9 @@ public class TextFile {
             myWriter.write("Original Request: " + type + " " + category + "," + " " + amount);
             myWriter.write("\n");
             myWriter.write("\n");
-            myWriter.write("Order cannot be fulfilled based on current inventory. Suggested manufacturers are: ");
+            myWriter.write("Order cannot be fulfilled based on current inventory. Suggested manufacturers are: " + manuNames);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            System.out.println("Successfully wrote to Order nOt Fulfulled the file.");
         } catch (IOException e) {
             e.printStackTrace();
         }
