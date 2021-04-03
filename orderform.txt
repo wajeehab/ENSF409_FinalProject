@@ -4,6 +4,10 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: mesh chair, 1
+Original Request: desk lamp, 1
 
-Order cannot be fulfilled based on current inventory. Suggested manufacturers are: Office Furnishings, Fine Office Supplies, Chairs R Us
+Items Ordered
+ID: L649
+ID: L342
+
+Total Price: $20

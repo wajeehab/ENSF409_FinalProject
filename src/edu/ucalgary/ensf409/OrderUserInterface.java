@@ -34,7 +34,7 @@ public class OrderUserInterface {
                 chair.selectChairInfo(getFurnitureType());
             if(!chair.getIsEmpty()) {
                 text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest(), chair.getIdCombo());
-                update.deleteChairFromDataBase(chair.getIdCombo());
+                update.deleteFromDataBase(chair.getIdCombo(), getFurnitureCategory());
             }
             else if (chair.getIsEmpty()){
                 text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findChairManu());
@@ -54,7 +54,7 @@ public class OrderUserInterface {
             lamp.selectLampInfo(getFurnitureType());
             if(!lamp.getIsEmpty()) {
                 text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo());
-                update.deleteLampFromDataBase(lamp.getIdCombo());
+                update.deleteFromDataBase(lamp.getIdCombo(), getFurnitureCategory());
             }
             else if (lamp.getIsEmpty()){
                 text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findLampManu());
