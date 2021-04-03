@@ -7,7 +7,7 @@ public class OrderUserInterface {
     private String furnitureType;
     private int numberItems;
     private Chair chair = new Chair();
-    private Lamp lamp;
+    private Lamp2 lamp2;
     private Desk desk = new Desk();
     private Filing filing = new Filing();
     private TextFile text = new TextFile();
@@ -51,13 +51,13 @@ public class OrderUserInterface {
 //        }
 //
         else if(getFurnitureCategory().equals("lamp") | (getFurnitureCategory().equals("Lamp"))){
-            lamp = new Lamp(getNumberItems());
-            lamp.selectLampInfo(getFurnitureType());
-            if(!lamp.getIsEmpty()) {
-                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo());
-                update.deleteFromDataBase(lamp.getIdCombo(), getFurnitureCategory());
+            lamp2 = new Lamp2(getNumberItems());
+            lamp2.selectLampInfo(getFurnitureType());
+            if(!lamp2.getIsEmpty()) {
+                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp2.getSmallest(), lamp2.getIdCombo());
+                update.deleteFromDataBase(lamp2.getIdCombo(), getFurnitureCategory());
             }
-            else if (lamp.getIsEmpty()){
+            else if (lamp2.getIsEmpty()){
                 text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findLampManu());
             }
 

@@ -88,7 +88,6 @@ public class Lamp {
                 i++;
             }
         }
-//        System.out.println(result);
         this.combinations = getRidofDuplicates(result);
         selectPrice();
     }
@@ -216,7 +215,7 @@ public class Lamp {
         return hasArray;
     }
 
-    
+
     public List<String> getIdCombo() {
         return combinations.get(sIndex);
     }
