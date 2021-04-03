@@ -7,7 +7,7 @@ public class OrderUserInterface {
     private String furnitureType;
     private int numberItems;
     private Chair chair = new Chair();
-    private Lamp lamp = new Lamp();
+    private Lamp lamp;
     private Desk desk = new Desk();
     private Filing filing = new Filing();
     private TextFile text = new TextFile();
@@ -51,6 +51,7 @@ public class OrderUserInterface {
 //        }
 //
         else if(getFurnitureCategory().equals("lamp") | (getFurnitureCategory().equals("Lamp"))){
+            lamp = new Lamp(getNumberItems());
             lamp.selectLampInfo(getFurnitureType());
             if(!lamp.getIsEmpty()) {
                 text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo());
