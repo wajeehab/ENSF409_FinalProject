@@ -84,25 +84,19 @@ public class Lamp {
         int price = 100;
         int bulbIndex = 0;
         int baseIndex = 0;
-
         isEmpty = checkEmpty();
         if(isEmpty){
-            System.exit(1);
-
+            return;
         }
-
         for (int i =0; i< hasBulb.size();i++){
             for (int j=0; j<hasBase.size();j++){
-
                 if(hasBulb.get(i).get(0).equals(hasBase.get(j).get(0))){
                     if(Integer.parseInt(hasBulb.get(i).get(1)) < price){
                         price = Integer.parseInt(hasBulb.get(i).get(1));
                         bulbIndex = i;
                         baseIndex = j;
-
                     }
                 }
-
                 else if (Integer.parseInt(hasBulb.get(i).get(1)) + Integer.parseInt(hasBase.get(j).get(1)) < price){
                     price = Integer.parseInt(hasBulb.get(i).get(1)) + Integer.parseInt(hasBase.get(j).get(1));
                     bulbIndex = i;
@@ -121,19 +115,18 @@ public class Lamp {
     }
 
     public void updateHasArrays(ArrayList<ArrayList<String>> hasArr, ArrayList<String> IDs){
-        for (int a =0; a< IDs.size();a++){
+        for (int a =0; a<IDs.size();a++){
             for (int j =0; j<hasArr.size();j++) {
                 if (hasArr.get(j).get(0).equals(IDs.get(a))) {
                     hasArr.remove(j);
-
                 }
             }
-            }
+        }
     }
-
     public boolean checkEmpty() {
         return hasBase.size() == 0 | hasBulb.size() == 0;
     }
+
      public boolean getIsEmpty(){
         return this.isEmpty;
      }
@@ -155,7 +148,6 @@ public class Lamp {
         }
         return combos;
     }
-
 
     public ArrayList<String> getIdCombo() {
         return combinations;

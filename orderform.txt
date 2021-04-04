@@ -4,10 +4,11 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: mesh chair, 1
+Original Request: mesh chair, 2
 
 Items Ordered
-ID: C0942
+ID: C8132
 ID: C9890
+ID: C0942
 
-Total Price: $150
+Total Price: $250
