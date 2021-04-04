@@ -33,13 +33,13 @@ public class OrderUserInterface {
         if (getFurnitureCategory().equals("chair") | (getFurnitureCategory().equals("Chair"))) {
             chair = new Chair(getNumberItems());
             chair.selectChairInfo(getFurnitureType());
-            if(!chair.getIsEmpty()) {
-                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest(), chair.getIdCombo());
-                update.deleteFromDataBase(chair.getIdCombo(), getFurnitureCategory());
-            }
-            else if (chair.getIsEmpty()){
-                text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findChairManu());
-            }
+//            if(!chair.getIsEmpty()) {
+//                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest(), chair.getIdCombo());
+//                update.deleteFromDataBase(chair.getIdCombo(), getFurnitureCategory());
+//            }
+//            else if (chair.getIsEmpty()){
+//                text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findChairManu());
+//            }
 
         }
 

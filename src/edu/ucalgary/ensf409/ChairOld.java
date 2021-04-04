@@ -61,6 +61,7 @@ public class ChairOld {
         if (!isEmpty){
             createCombinations();
         }
+        System.out.println(combinations);
     }
 
 

@@ -4,6 +4,10 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: desk lamp, 2
+Original Request: mesh chair, 1
 
-Order cannot be fulfilled based on current inventory. Suggested manufacturers are: Furniture Goods, Office Furnishings, Fine Office Supplies
+Items Ordered
+ID: C0942
+ID: C9890
+
+Total Price: $150

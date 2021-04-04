@@ -82,7 +82,6 @@ public class Lamp {
             return;
         }
         int price = 100;
-//        this.smallest = 100;
         int bulbIndex = 0;
         int baseIndex = 0;
 
