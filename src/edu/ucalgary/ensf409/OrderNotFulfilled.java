@@ -38,11 +38,6 @@ public class OrderNotFulfilled {
         lampId.add("005");
     }
 
-    public void message() {
-        System.out.println("Order Not fulfilled");
-    }
-
-
     public String findChairManu(){
         StringJoiner str = new StringJoiner(", ");
         try {

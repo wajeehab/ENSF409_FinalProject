@@ -19,7 +19,7 @@ public class Desk {
         private int smallest;
         private boolean isEmpty;
         private int numberOfItems;
-        private String orderCombo[] = new String[16];
+        private String[] orderCombo = new String[16];
         private ArrayList<String> totalOrder = new ArrayList<>();
 
         public Desk(int numberItems) {
@@ -90,7 +90,6 @@ public class Desk {
             selectPrice();
         }
 
-
         public void selectPrice() {
             try{
                 Statement myStmt = dbConnect.createStatement();
@@ -106,16 +105,12 @@ public class Desk {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-
-            System.out.println(price);
         }
 
         private void orderCombos(int num) {
             if(num<1){
                 return;
             }
-            int orderPrice = 1000;
-
             isEmpty = checkEmpty();
             if(isEmpty){
                 return;
@@ -123,37 +118,11 @@ public class Desk {
             combinations.clear();
             price.clear();
             createCombinations();
-            for(int a =0;a< price.size();a++){
-                int sum =0;
-                for(int b =0; b<price.get(a).size();b++){
-                    boolean used = false;
-                    for(int c = 0; c<totalOrder.size();c++){
-                        if(combinations.get(a).get(b).equals(totalOrder.get(c))){
-                            used = true;
-                        }
-                    }
-                    if(!used) {
-                        sum = sum + Integer.parseInt(price.get(a).get(b));
-                    }
-                }
-                if(sum<orderPrice){
-                    orderPrice = sum;
-                    orderCombo = combinations.get(a).toArray(new String[0]);
-                }
-            }
+
+            int orderPrice = findPriceAndCombo();
+
             setSmallest(orderPrice);
-            boolean exists;
-            for(int i =0; i<orderCombo.length;i++){
-                exists = false;
-                for (int j =0; j<totalOrder.size();j++){
-                    if(totalOrder.get(j).equals(orderCombo[i])){
-                        exists = true;
-                    }
-                }
-                if(!exists){
-                    totalOrder.add(orderCombo[i]);
-                }
-            }
+            addToOrder();
             updateHasArrays(hasLegs, orderCombo);
             updateHasArrays(hasDrawer, orderCombo);
             updateHasArrays(hasTop, orderCombo);
@@ -161,8 +130,47 @@ public class Desk {
             return;
         }
 
+    public int findPriceAndCombo(){
+        int cost = 1000;
+        for(int a =0;a< price.size();a++){
+            int sum =0;
+            for(int b =0; b<price.get(a).size();b++){
+                boolean used = false;
+                for(int c = 0; c<totalOrder.size();c++){
+                    if(combinations.get(a).get(b).equals(totalOrder.get(c))){
+                        used = true;
+                    }
+                }
+                if(!used) {
+                    sum = sum + Integer.parseInt(price.get(a).get(b));
+                }
+            }
+            if(sum<cost){
+                cost = sum;
+                orderCombo = combinations.get(a).toArray(new String[0]);
+            }
+        }
+        return cost;
 
-        public ArrayList<ArrayList<String>> getRidofDuplicates(ArrayList<ArrayList<String>> result){
+    }
+
+    public void addToOrder(){
+        boolean exists;
+        for(int i =0; i<this.orderCombo.length;i++){
+            exists = false;
+            for (int j =0; j<this.totalOrder.size();j++){
+                if(this.totalOrder.get(j).equals(this.orderCombo[i])){
+                    exists = true;
+                }
+            }
+            if(!exists){
+                this.totalOrder.add(this.orderCombo[i]);
+            }
+        }
+    }
+
+
+    public ArrayList<ArrayList<String>> getRidofDuplicates(ArrayList<ArrayList<String>> result){
             ArrayList<ArrayList<String>> combos = new ArrayList<>();
             for (int b = 0; b < result.size(); b++) {
                 combos.add(b, new ArrayList<>());

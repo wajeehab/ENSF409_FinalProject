@@ -4,11 +4,10 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: standing desk, 2
+Original Request: small filing, 1
 
 Items Ordered
-ID: D2341
-ID: D1920
-ID: D4438
+ID: F006
+ID: F013
 
-Total Price: $260
+Total Price: $100

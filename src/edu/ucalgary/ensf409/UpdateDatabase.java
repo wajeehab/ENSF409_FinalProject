@@ -33,24 +33,4 @@ public class UpdateDatabase {
         }
     }
 
-//    public void deleteLampFromDataBase(List<String> idCombo){
-//
-//        try {
-//            for(int i =0; i< idCombo.size();i++){
-//                String query = "DELETE FROM LAMP WHERE ID = ? ";
-//                PreparedStatement myStmt = dbConnect.prepareStatement(query);
-//
-//                myStmt.setString(1, idCombo.get(i));
-//
-//                int rowCount = myStmt.executeUpdate();
-//                System.out.println("Rows affected: " + rowCount);
-//
-//                myStmt.close();
-//            }
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-//
-
 }
