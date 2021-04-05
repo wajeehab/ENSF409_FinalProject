@@ -42,12 +42,9 @@ public class Lamp {
                 base.get(i).add(1, results.getString("Base"));
                 base.get(i).add(2, results.getString("Price"));
 
-
                 bulb.get(i).add(0, results.getString("ID"));
                 bulb.get(i).add(1, results.getString("Bulb"));
                 bulb.get(i).add(2, results.getString("Price"));
-
-
             }
 
         } catch (SQLException throwables) {
@@ -119,6 +116,7 @@ public class Lamp {
             for (int j =0; j<hasArr.size();j++) {
                 if (hasArr.get(j).get(0).equals(IDs.get(a))) {
                     hasArr.remove(j);
+                    return;
                 }
             }
         }

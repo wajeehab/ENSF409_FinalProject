@@ -17,10 +17,6 @@ public class Chair {
     private int smallest;
     private boolean isEmpty;
     private int numberOfItems;
-    private int existingLegs;
-    private int existingArms;
-    private int existingSeat;
-    private int existingCushion;
     private String orderCombo[] = new String[16];
     private ArrayList<String> totalOrder = new ArrayList<>();
 
@@ -29,10 +25,6 @@ public class Chair {
         dbConnect = database.getDbConnect();
         this.numberOfItems = numberItems;
         this.smallest =0;
-        this.existingArms =0;
-        this.existingLegs=0;
-        this.existingCushion=0;
-        this.existingSeat=0;
     }
 
     public void selectChairInfo(String type) {
@@ -83,7 +75,7 @@ public class Chair {
     }
 
 
-    public void createCombinations(int existingLegs, int existingArms, int existingSeat, int existingCushion) {
+    public void createCombinations() {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         int i = 0;
         for (String s1 : hasLegs) {
@@ -91,38 +83,19 @@ public class Chair {
                 for (String s3 : hasSeats) {
                     for (String s4 : hasCushions) {
                         result.add(i, new ArrayList<>());
-                        if(existingLegs == 0){
                             result.get(i).add(s1);
-                        }
-                        if(existingArms == 0){
                             result.get(i).add(s2);
-                        }
-                        if(existingSeat == 0) {
                             result.get(i).add(s3);
-                        }
-                        if(existingCushion ==0){
                             result.get(i).add(s4);
-                        }
-                        i++;
+                            i++;
+                         }
                     }
                 }
             }
-        }
-        if(existingArms>0){
-            existingArms--;
-        }
-        if(existingLegs>0){
-            existingLegs--;
-        }
-        if(existingSeat>0){
-            existingSeat--;
-        }
-        if(existingCushion>0){
-            existingCushion--;
-        }
         combinations= getRidofDuplicates(result);
         selectPrice();
     }
+
 
     public void selectPrice() {
         try{
@@ -139,6 +112,8 @@ public class Chair {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        System.out.println(price);
     }
 
     private void orderCombos(int num) {
@@ -152,11 +127,20 @@ public class Chair {
             return;
         }
         combinations.clear();
-        createCombinations(existingLegs, existingArms,existingSeat,existingCushion);
+        price.clear();
+        createCombinations();
         for(int a =0;a< price.size();a++){
             int sum =0;
             for(int b =0; b<price.get(a).size();b++){
-                sum = sum+Integer.parseInt(price.get(a).get(b));
+                boolean used = false;
+                for(int c = 0; c<totalOrder.size();c++){
+                    if(combinations.get(a).get(b).equals(totalOrder.get(c))){
+                        used = true;
+                    }
+                }
+                if(!used) {
+                    sum = sum + Integer.parseInt(price.get(a).get(b));
+                }
             }
             if(sum<orderPrice){
                 orderPrice = sum;
@@ -164,33 +148,18 @@ public class Chair {
             }
         }
         setSmallest(orderPrice);
+        boolean exists;
         for(int i =0; i<orderCombo.length;i++){
-            for(String s1 : hasLegs) {
-                if (orderCombo[i].equals(s1)) {
-                    existingLegs++;
+            exists = false;
+            for (int j =0; j<totalOrder.size();j++){
+                if(totalOrder.get(j).equals(orderCombo[i])){
+                    exists = true;
                 }
             }
-            for (String s2 : hasArms){
-                if (orderCombo[i].equals(s2)) {
-                    existingArms++;
-                }
+            if(!exists){
+                totalOrder.add(orderCombo[i]);
             }
-            for (String s3 : hasSeats){
-                if (orderCombo[i].equals(s3)) {
-                    existingSeat++;
-                }
-            }
-            for (String s4 : hasCushions){
-                if (orderCombo[i].equals(s4)) {
-                    existingCushion++;
-                }
-            }
-            totalOrder.add(orderCombo[i]);
         }
-        existingLegs--;
-        existingCushion--;
-        existingSeat--;
-        existingArms--;
         updateHasArrays(hasArms, orderCombo);
         updateHasArrays(hasLegs, orderCombo);
         updateHasArrays(hasSeats, orderCombo);
@@ -198,6 +167,7 @@ public class Chair {
         orderCombos(num-1);
         return;
     }
+
 
     public ArrayList<ArrayList<String>> getRidofDuplicates(ArrayList<ArrayList<String>> result){
         ArrayList<ArrayList<String>> combos = new ArrayList<>();
@@ -230,8 +200,10 @@ public class Chair {
     public void updateHasArrays(ArrayList<String> hasArr, String[] IDs){
         for (int a =0; a< IDs.length;a++){
             for(int j =0; j<hasArr.size();j++){
-                if(hasArr.get(j).equals(IDs[a]))
-                hasArr.remove(j);
+                if(hasArr.get(j).equals(IDs[a])){
+                    hasArr.remove(j);
+                    return;
+                }
             }
         }
     }

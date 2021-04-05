@@ -8,7 +8,7 @@ public class OrderUserInterface {
     private int numberItems;
     private Chair chair;
     private Lamp lamp;
-    private Desk desk = new Desk();
+    private Desk desk;
     private Filing filing = new Filing();
     private TextFile text = new TextFile();
     private UpdateDatabase update = new UpdateDatabase();
@@ -43,9 +43,17 @@ public class OrderUserInterface {
 
         }
 
-//        else if(getFurnitureCategory().equals("desk") | (getFurnitureCategory().equals("Desk"))){
-//            selectDeskInfo();
-//        }
+        else if(getFurnitureCategory().equals("desk") | (getFurnitureCategory().equals("Desk"))){
+             desk = new Desk(getNumberItems());
+             desk.selectDeskInfo(getFurnitureType());
+            if(!desk.getIsEmpty()) {
+                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), desk.getSmallest(), desk.getIdCombo());
+                update.deleteFromDataBase(desk.getIdCombo(), getFurnitureCategory());
+            }
+            else if (desk.getIsEmpty()){
+                text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findChairManu());
+            }
+        }
 //
 //        else if(getFurnitureCategory().equals("Filing") | (getFurnitureCategory().equals("filing"))){
 //            selectFilingInfo();
