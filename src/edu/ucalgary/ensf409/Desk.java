@@ -89,7 +89,7 @@ public class Desk {
         }
 
     /**
-     * This method will go through the hasArrays and create every combination possible
+     * This method will go through the hasArrays and create every combination possible for a full order
      */
         public void createCombinations() {
             ArrayList<ArrayList<String>> result = new ArrayList<>();
@@ -128,38 +128,38 @@ public class Desk {
                 throwables.printStackTrace();
             }
         }
-    /** This is a recursive method which finds the cheapest combination of parts
+
+    /** This is a recursive method which finds the cheapest combination of parts for a given number of orders
      * @param num - number of orders
      */
-        private void orderCombos(int num) {
-            if(num<1){
-                return; //base case
-            }
-            isEmpty = checkEmpty(); //checks if any of the hasArrays are empty and if no more combinations can be made
-            if(isEmpty){
-                return; //returns if any of them are empty
-            }
-            combinations.clear(); //clear the previous combinations from the order before
-            price.clear(); //clear the previous prices from the order before
-            createCombinations(); //creating the combinations
-
-            int orderPrice = findPriceAndCombo(); //calls function which finds the smallest order price
-
-            setSmallest(orderPrice); //calling setter method to set the smallest price
-            addToOrder(); //for multiple orders, this function will add on to the first generated combination
-
-            updateHasArrays(hasLegs, orderCombo); //updating the hasArrays
-            updateHasArrays(hasDrawer, orderCombo);
-            updateHasArrays(hasTop, orderCombo);
-
-            orderCombos(num-1); //decrementing the number of order for recursion
-            return;
+    private void orderCombos(int num) {
+        if(num<1){
+            return; //base case
         }
+        isEmpty = checkEmpty(); //checks if any of the hasArrays are empty and if no more combinations can be made
+        if(isEmpty){
+            return; //returns if any of them are empty
+        }
+        combinations.clear(); //clear the previous combinations from the order before
+        price.clear(); //clear the previous prices from the order before
+        createCombinations(); //creating the combinations
+
+        int orderPrice = findPriceAndCombo(); //calls function which finds the smallest order price
+
+        setSmallest(orderPrice); //calling setter method to set the smallest price
+        addToOrder(); //for multiple orders, this function will add on to the first generated combination
+
+        updateHasArrays(hasLegs, orderCombo); //updating the hasArrays
+        updateHasArrays(hasDrawer, orderCombo);
+        updateHasArrays(hasTop, orderCombo);
+
+        orderCombos(num-1); //decrementing the number of order for recursion
+        return;
+    }
 
     /** This method finds the combination with the lowest price and returns the price
      * @return
      */
-
     public int findPriceAndCombo(){
         int cost = 1000;
         for(int a =0;a< price.size();a++){
@@ -186,7 +186,7 @@ public class Desk {
     }
 
     /**
-     * This method will add on ID's if there are multiple ID's and more than one item needs to be built
+     * This method will add ID's to the total order, ignoring duplicates (IDs passed in during the previous recursion)
      */
     public void addToOrder(){
         boolean exists;

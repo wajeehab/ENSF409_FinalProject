@@ -94,7 +94,7 @@ public class Chair {
     }
 
     /**
-     * This method will go through the hasArrays and create every combination possible
+     * This method will go through the hasArrays and create every combination possible for a full order
      */
     public void createCombinations() {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
@@ -139,7 +139,7 @@ public class Chair {
 //        System.out.println(price);
     }
 
-    /** This is a recursive method which finds the cheapest combination of parts
+    /** This is a recursive method which finds the cheapest combination of parts for a given number of orders
      * @param num - number of orders
      */
     private void orderCombos(int num) {
@@ -196,7 +196,7 @@ public class Chair {
     }
 
     /**
-     * This method will add on ID's if there are multiple ID's and more than one item needs to be built
+     * This method will add ID's to the total order, ignoring duplicates (IDs passed in during the previous recursion)
      */
     public void addToOrder() {
         boolean exists;

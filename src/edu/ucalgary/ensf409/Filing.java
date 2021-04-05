@@ -22,6 +22,12 @@ public class Filing {
     private String[] orderCombo = new String[16];
     private ArrayList<String> totalOrder = new ArrayList<>();
 
+    /**
+     * Constructor method which initializes the database connection and takes in
+     * the number of desks required for the order.
+     *
+     * @param numberItems - the  number of items required in the order
+     */
     public Filing(int numberItems) {
         database.Initialize();
         dbConnect = database.getDbConnect();
@@ -29,6 +35,15 @@ public class Filing {
         this.smallest =0;
     }
 
+    /**
+     * This function searches the Desk table in the inventory database
+     * and creates table which stores the ID and inventory of the items
+     * which match the given type. From the extracted inventory from the database,
+     * HasArrays are created which store the ID's which have "Y" values for
+     * specific parts.
+     *
+     * @param type - the type of furniture which is requested in the order
+     */
     public void selectFilingInfo(String type) {
         System.out.println("Starting");
         ArrayList<ArrayList<String>> rails = new ArrayList<>();
@@ -71,7 +86,9 @@ public class Filing {
         }
     }
 
-
+    /**
+     * This method will go through the hasArrays and create every combination possible for a full order
+     */
     public void createCombinations() {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         int i = 0;
@@ -90,6 +107,10 @@ public class Filing {
         selectPrice();
     }
 
+    /**
+     * This method goes through the combination lists and finds the price associated
+     * with each ID in the combination.
+     */
     public void selectPrice() {
         try{
             Statement myStmt = dbConnect.createStatement();
@@ -107,6 +128,9 @@ public class Filing {
         }
     }
 
+    /** This is a recursive method which finds the cheapest combination of parts for a given number of orders
+     * @param num - number of orders
+     */
     private void orderCombos(int num) {
         if(num<1){
             return;
@@ -130,6 +154,9 @@ public class Filing {
         return;
     }
 
+    /** This method finds the combination with the lowest price and returns the price
+     * @return
+     */
     public int findPriceAndCombo(){
         int cost = 1000;
         for(int a =0;a< price.size();a++){
@@ -154,6 +181,9 @@ public class Filing {
 
     }
 
+    /**
+     * This method will add ID's to the total order, ignoring duplicates (IDs passed in during the previous recursion)
+     */
     public void addToOrder(){
         boolean exists;
         for(int i =0; i<this.orderCombo.length;i++){
@@ -170,6 +200,10 @@ public class Filing {
     }
 
 
+    /** This method will remove duplicate values within the passed array in order to create unique combinations
+     * @param result - the list which needs duplicates removes
+     * @return returns updated list
+     */
     public ArrayList<ArrayList<String>> getRidofDuplicates(ArrayList<ArrayList<String>> result){
         ArrayList<ArrayList<String>> combos = new ArrayList<>();
         for (int b = 0; b < result.size(); b++) {
@@ -184,10 +218,17 @@ public class Filing {
     }
 
 
+    /** This method checks the size of the hasArrays and returns true or false
+     * @return true or false
+     */
     private boolean checkEmpty() {
         return hasDrawers.size() == 0| hasCabinets.size() == 0 | hasRails.size() == 0;
     }
 
+    /**This method creates hasArrays
+     * @param arr - the initial array which stores all inventory from the Database for a given ID
+     * @return the correct hasArray which contains ID which contains the correct inventory for each part
+     */
     public ArrayList<String> createHasArrays(ArrayList<ArrayList<String>> arr) {
         ArrayList<String> newArr = new ArrayList<>();
         for (int i = 0; i < arr.size(); i++) {
@@ -198,6 +239,11 @@ public class Filing {
         return newArr;
     }
 
+    /** For multiple orders, this method updates the hasArrays to remove the ID's who's parts have been
+     * used to create an item
+     * @param hasArr - the hasArray
+     * @param IDs - array which stores the ID's of the combination
+     */
     public void updateHasArrays(ArrayList<String> hasArr, String[] IDs){
         for (int a =0; a< IDs.length;a++){
             for(int j =0; j<hasArr.size();j++){
@@ -209,18 +255,36 @@ public class Filing {
         }
     }
 
+    /**
+     * getter method for isEmpty, which indicates if any of the hasArrays are empty
+     * and no more combinations can be made
+     * @return
+     */
     public boolean getIsEmpty() {
         return isEmpty;
     }
 
+    /**
+     * getter method for the combination which makes the cheapest order
+     * @return
+     */
     public List<String> getIdCombo() {
         return totalOrder;
     }
 
+    /**
+     * getter method for the cheapest price
+     *
+     * @return
+     */
     public int getSmallest() {
         return smallest;
     }
 
+    /**
+     * setter method for the price.
+     * @param p - price for combination
+     */
     public void setSmallest(int p){
         this.smallest += p;
     }
