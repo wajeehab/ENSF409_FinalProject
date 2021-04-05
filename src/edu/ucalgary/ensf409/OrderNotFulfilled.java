@@ -16,6 +16,10 @@ public class OrderNotFulfilled {
     private ArrayList<String> lampId = new ArrayList<>();
     private ResultSet results;
 
+    /**
+     * constructor method which initializes the database connection and
+     * initializes the Id arrays with their respective manufacturer ID's
+     */
     public OrderNotFulfilled() {
         database.Initialize();
         dbConnect = database.getDbConnect();
@@ -38,6 +42,10 @@ public class OrderNotFulfilled {
         lampId.add("005");
     }
 
+    /**
+     * This method finds the names of the manufacturers for chair in the case of an order not fulfilled
+     * @return the string containing the names of the manufacturers
+     */
     public String findChairManu(){
         StringJoiner str = new StringJoiner(", ");
         try {
@@ -54,7 +62,10 @@ public class OrderNotFulfilled {
         }
         return str.toString();
     }
-
+    /**
+     * This method finds the names of the manufacturers for lamp in the case of an order not fulfilled
+     * @return the string containing the names of the manufacturers
+     */
     public String findLampManu(){
         StringJoiner str = new StringJoiner(", ");
         try {
@@ -71,7 +82,10 @@ public class OrderNotFulfilled {
         }
         return str.toString();
     }
-
+    /**
+     * This method finds the names of the manufacturers for filing in the case of an order not fulfilled
+     * @return the string containing the names of the manufacturers
+     */
     public String findFilingManu(){
         StringJoiner str = new StringJoiner(", ");
         try {
@@ -88,7 +102,10 @@ public class OrderNotFulfilled {
         }
         return str.toString();
     }
-
+    /**
+     * This method finds the names of the manufacturers for desk in the case of an order not fulfilled
+     * @return the string containing the names of the manufacturers
+     */
     public String findDeskManu(){
         StringJoiner str = new StringJoiner(", ");
         try {
