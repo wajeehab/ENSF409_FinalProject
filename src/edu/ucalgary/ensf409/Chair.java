@@ -120,7 +120,6 @@ public class Chair {
         if(num<1){
             return;
         }
-        int orderPrice = 1000;
 
         isEmpty = checkEmpty();
         if(isEmpty){
@@ -129,6 +128,22 @@ public class Chair {
         combinations.clear();
         price.clear();
         createCombinations();
+
+        int orderPrice = findPriceAndCombo();
+        
+        setSmallest(orderPrice);
+        addToOrder();
+
+        updateHasArrays(hasArms, orderCombo);
+        updateHasArrays(hasLegs, orderCombo);
+        updateHasArrays(hasSeats, orderCombo);
+        updateHasArrays(hasCushions, orderCombo);
+        orderCombos(num-1);
+        return;
+    }
+
+    public int findPriceAndCombo(){
+        int cost = 1000;
         for(int a =0;a< price.size();a++){
             int sum =0;
             for(int b =0; b<price.get(a).size();b++){
@@ -142,30 +157,28 @@ public class Chair {
                     sum = sum + Integer.parseInt(price.get(a).get(b));
                 }
             }
-            if(sum<orderPrice){
-                orderPrice = sum;
+            if(sum<cost){
+                cost = sum;
                 orderCombo = combinations.get(a).toArray(new String[0]);
             }
         }
-        setSmallest(orderPrice);
+        return cost;
+
+    }
+
+    public void addToOrder(){
         boolean exists;
-        for(int i =0; i<orderCombo.length;i++){
+        for(int i =0; i<this.orderCombo.length;i++){
             exists = false;
-            for (int j =0; j<totalOrder.size();j++){
-                if(totalOrder.get(j).equals(orderCombo[i])){
+            for (int j =0; j<this.totalOrder.size();j++){
+                if(this.totalOrder.get(j).equals(this.orderCombo[i])){
                     exists = true;
                 }
             }
             if(!exists){
-                totalOrder.add(orderCombo[i]);
+                this.totalOrder.add(this.orderCombo[i]);
             }
         }
-        updateHasArrays(hasArms, orderCombo);
-        updateHasArrays(hasLegs, orderCombo);
-        updateHasArrays(hasSeats, orderCombo);
-        updateHasArrays(hasCushions, orderCombo);
-        orderCombos(num-1);
-        return;
     }
 
 
