@@ -65,16 +65,16 @@ public class Chair {
                 cushion.add(i, new ArrayList<>());
 
                 legs.get(i).add(0, results.getString("ID"));
-                legs.get(i).add(1, results.getString("Legs"));
+                legs.get(i).add(1, results.getString("Legs")); //associates 'Y' or 'N' for the legs of the ID in question
 
                 arms.get(i).add(0, results.getString("ID"));
-                arms.get(i).add(1, results.getString("Arms"));
+                arms.get(i).add(1, results.getString("Arms")); //associates 'Y' or 'N' for the arms of the ID in question
 
                 seat.get(i).add(0, results.getString("ID"));
-                seat.get(i).add(1, results.getString("Seat"));
+                seat.get(i).add(1, results.getString("Seat")); //associates 'Y' or 'N' for the seat of the ID in question
 
                 cushion.get(i).add(0, results.getString("ID"));
-                cushion.get(i).add(1, results.getString("Cushion"));
+                cushion.get(i).add(1, results.getString("Cushion")); //associates 'Y' or 'N' for the cushion of the ID in question
             }
 
         } catch (SQLException throwables) {
@@ -127,9 +127,9 @@ public class Chair {
             for (int i = 0; i < combinations.size(); i++) {
                 price.add(i, new ArrayList<>());
                 for (int j = 0; j < combinations.get(i).size(); j++) {
-                    results = myStmt.executeQuery("SELECT * FROM  CHAIR  WHERE ID = '" + combinations.get(i).get(j) + "'");
+                    results = myStmt.executeQuery("SELECT * FROM  CHAIR  WHERE ID = '" + combinations.get(i).get(j) + "'"); //get price of every element in combination
                     while (results.next()) {
-                        price.get(i).add(results.getString("Price"));
+                        price.get(i).add(results.getString("Price")); //create price array
                     }
                 }
             }
@@ -153,7 +153,7 @@ public class Chair {
         }
         combinations.clear();  //clear the previous combinations from the order before
         price.clear(); //clear the previous prices from the order before
-        createCombinations(); //creating the combinations
+        createCombinations(); //creating the combinations and their prices
 
         int orderPrice = findPriceAndCombo(); //calls function which finds the smallest order price
 
@@ -180,11 +180,11 @@ public class Chair {
                 for (int c = 0; c < totalOrder.size(); c++) {
                     if (combinations.get(a).get(b).equals(totalOrder.get(c))) {
                         used = true;   //for multiple orders, if an ID is reused for another part, this
-                                      //will remove that already used ID
+                                       //will ignore the price of that already used ID
                     }
                 }
                 if (!used) {
-                    sum = sum + Integer.parseInt(price.get(a).get(b)); //if the ID has not been used in the previous combination, then calculate the price
+                    sum = sum + Integer.parseInt(price.get(a).get(b)); //if the ID has not been used in the previous combination, then add to the price
                 }
             }
             if (sum < cost) {
@@ -203,12 +203,12 @@ public class Chair {
         for (int i = 0; i < this.orderCombo.length; i++) {
             exists = false;
             for (int j = 0; j < this.totalOrder.size(); j++) {
-                if (this.totalOrder.get(j).equals(this.orderCombo[i])) {
-                    exists = true;
+                if (this.totalOrder.get(j).equals(this.orderCombo[i])) { //if ID already exists in totalOrder
+                    exists = true; //will not add the ID again
                 }
             }
             if (!exists) {
-                this.totalOrder.add(this.orderCombo[i]);
+                this.totalOrder.add(this.orderCombo[i]); //add the combination for the current order number to the overall order combination
             }
         }
     }

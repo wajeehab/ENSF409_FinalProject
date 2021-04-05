@@ -18,13 +18,28 @@ public class Lamp {
     private boolean isEmpty;
     private int numberOfItems;
 
+    /**
+     * Constructor method which initializes the database connection and takes in
+     * the number of desks required for the order.
+     *
+     * @param numberItems - the  number of items required in the order
+     */
     public Lamp (int numberItems) {
         database.Initialize();
         dbConnect = database.getDbConnect();
-        this.numberOfItems = numberItems;
-        this.smallest =0;
+        this.numberOfItems = numberItems; //initializes the number of items needed in that order
+        this.smallest =0; //initializing the smallest sum to zero
     }
 
+    /**
+     * This function searches the Desk table in the inventory database
+     * and creates table which stores the ID and inventory of the items
+     * which match the given type. From the extracted inventory from the database,
+     * HasArrays are created which store the ID's which have "Y" values for
+     * specific parts.
+     *
+     * @param type - the type of furniture which is requested in the order
+     */
     public void selectLampInfo(String type) {
         System.out.println("Starting");
         ArrayList<ArrayList<String>> base = new ArrayList<>();
@@ -39,27 +54,35 @@ public class Lamp {
                 bulb.add(i, new ArrayList<>());
 
                 base.get(i).add(0, results.getString("ID"));
-                base.get(i).add(1, results.getString("Base"));
-                base.get(i).add(2, results.getString("Price"));
+                base.get(i).add(1, results.getString("Base")); //associates 'Y' or 'N' for the base of the ID in question
+                base.get(i).add(2, results.getString("Price")); //associates price with ID
 
                 bulb.get(i).add(0, results.getString("ID"));
-                bulb.get(i).add(1, results.getString("Bulb"));
-                bulb.get(i).add(2, results.getString("Price"));
+                bulb.get(i).add(1, results.getString("Bulb")); //associates 'Y' or 'N' for the legs of the ID in question
+                bulb.get(i).add(2, results.getString("Price")); //associates price with ID
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        this.hasBase = createHasArrays(base);
+        this.hasBase = createHasArrays(base); //creating the HasArrays
         this.hasBulb = createHasArrays(bulb);
-        isEmpty = checkEmpty();
-        if (!isEmpty) {
+
+        isEmpty = checkEmpty(); //checking to make sure the HasArrays are not empty
+        if (!isEmpty) { //if not empty, then create combinations with the hasArrays
             orderCombos(this.numberOfItems);
         }
+        else{
+            return; //if the hasArrays are empty, then return back to main and do not make combinations
+        }
 
-        this.combinations = getRidofDuplicates(this.combinations);
+        this.combinations = getRidofDuplicates(this.combinations); //remove duplicate ID from overall order combination
     }
 
+    /**This method creates hasArrays
+     * @param arr - the initial array which stores all inventory from the Database for a given ID
+     * @return the correct hasArray which contains ID which contains the correct inventory for each part
+     */
     public ArrayList<ArrayList<String>> createHasArrays(ArrayList<ArrayList<String>> arr) {
         ArrayList<ArrayList<String>> newArr = new ArrayList<>();
         int j =0;
@@ -74,43 +97,62 @@ public class Lamp {
         return newArr;
     }
 
+    /** This is a recursive method which finds the cheapest combination of parts for a given number of orders
+     * @param num - number of orders
+     */
     public void orderCombos(int num){
-        if(num<1){
+        if(num<1){ //base case
             return;
         }
-        int price = 100;
+
+        isEmpty = checkEmpty(); //checks if any of the hasArrays are empty and if no more combinations can be made
+        if(isEmpty){
+            return; //returns if any of them are empty
+        }
+        
+        int price = findPriceAndCombo(); //calls function which finds the smallest order price
+        setSmallest(price); //calling setter method to set the smallest price
+
+        updateHasArrays(hasBulb, combinations); //updating the hasArrays
+        updateHasArrays(hasBase, combinations);
+
+        orderCombos(num -1); //decrementing the number of order for recursion
+        return;
+    }
+
+    /** This method finds the combination with the lowest price and returns the price
+     * @return
+     */
+    public int findPriceAndCombo(){
+        int cost = 100;
         int bulbIndex = 0;
         int baseIndex = 0;
-        isEmpty = checkEmpty();
-        if(isEmpty){
-            return;
-        }
         for (int i =0; i< hasBulb.size();i++){
             for (int j=0; j<hasBase.size();j++){
-                if(hasBulb.get(i).get(0).equals(hasBase.get(j).get(0))){
-                    if(Integer.parseInt(hasBulb.get(i).get(1)) < price){
-                        price = Integer.parseInt(hasBulb.get(i).get(1));
-                        bulbIndex = i;
+                if(hasBulb.get(i).get(0).equals(hasBase.get(j).get(0))){ //if the ID matches in the 2 has Arrays
+                    if(Integer.parseInt(hasBulb.get(i).get(1)) < cost){ //if the price of the ID is lower than current lowest price
+                        cost = Integer.parseInt(hasBulb.get(i).get(1)); //replace lowest price
+                        bulbIndex = i; //points to index which gave lowest cost
                         baseIndex = j;
                     }
                 }
-                else if (Integer.parseInt(hasBulb.get(i).get(1)) + Integer.parseInt(hasBase.get(j).get(1)) < price){
-                    price = Integer.parseInt(hasBulb.get(i).get(1)) + Integer.parseInt(hasBase.get(j).get(1));
-                    bulbIndex = i;
+                else if (Integer.parseInt(hasBulb.get(i).get(1)) + Integer.parseInt(hasBase.get(j).get(1)) < cost){ //if the price of the (non-matching) IDs is lower than current lowest price
+                    cost = Integer.parseInt(hasBulb.get(i).get(1)) + Integer.parseInt(hasBase.get(j).get(1)); //replace lowest price
+                    bulbIndex = i; //points to index which gave lowest cost
                     baseIndex = j;
                 }
             }
         }
-        setSmallest(price);
-        combinations.add(hasBulb.get(bulbIndex).get(0));
+        combinations.add(hasBulb.get(bulbIndex).get(0)); //add IDs to order combination
         combinations.add(hasBase.get(baseIndex).get(0));
-
-        updateHasArrays(hasBulb, combinations);
-        updateHasArrays(hasBase, combinations);
-        orderCombos(num -1);
-        return;
+        return cost;
     }
 
+    /** For multiple orders, this method updates the hasArrays to remove the ID's who's parts have been
+     * used to create an item
+     * @param hasArr - the hasArray
+     * @param IDs - array which stores the ID's of the combination
+     */
     public void updateHasArrays(ArrayList<ArrayList<String>> hasArr, ArrayList<String> IDs){
         for (int a =0; a<IDs.size();a++){
             for (int j =0; j<hasArr.size();j++) {
@@ -121,22 +163,43 @@ public class Lamp {
             }
         }
     }
+
+    /** This method checks the size of the hasArrays and returns true or false
+     * @return true or false
+     */
     public boolean checkEmpty() {
         return hasBase.size() == 0 | hasBulb.size() == 0;
     }
 
+    /**
+     * getter method for isEmpty, which indicates if any of the hasArrays are empty
+     * and no more combinations can be made
+     * @return
+     */
      public boolean getIsEmpty(){
         return this.isEmpty;
      }
 
+     /**
+     * getter method for the cheapest price
+     * @return
+     */
     public int getSmallest() {
         return this.smallest;
     }
 
+    /**
+     * setter method for the price.
+     * @param p - price for combination
+     */
     public void setSmallest(int p){
         this.smallest += p;
     }
 
+    /** This method will remove duplicate values within the passed array in order to create unique combinations
+     * @param result - the list which needs duplicates removes
+     * @return returns updated list
+     */
     public ArrayList<String> getRidofDuplicates(ArrayList<String> result){
         ArrayList<String> combos = new ArrayList<>();
         for (int b = 0; b < result.size(); b++) {
@@ -147,6 +210,10 @@ public class Lamp {
         return combos;
     }
 
+    /**
+     * getter method for the combination which makes the cheapest order
+     * @return
+     */
     public ArrayList<String> getIdCombo() {
         return combinations;
     }

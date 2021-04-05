@@ -31,8 +31,8 @@ public class Filing {
     public Filing(int numberItems) {
         database.Initialize();
         dbConnect = database.getDbConnect();
-        this.numberOfItems = numberItems;
-        this.smallest =0;
+        this.numberOfItems = numberItems; //initializes the number of items needed in that order
+        this.smallest =0; //initializing the smallest sum to zero
     }
 
     /**
@@ -60,29 +60,29 @@ public class Filing {
                 drawers.add(i, new ArrayList<>());
 
                 rails.get(i).add(0, results.getString("ID"));
-                rails.get(i).add(1, results.getString("Rails"));
+                rails.get(i).add(1, results.getString("Rails")); //associates 'Y' or 'N' for the rails of the ID in question
 
                 drawers.get(i).add(0, results.getString("ID"));
-                drawers.get(i).add(1, results.getString("Drawers"));
+                drawers.get(i).add(1, results.getString("Drawers")); //associates 'Y' or 'N' for the drawers of the ID in question
 
                 cabinets.get(i).add(0, results.getString("ID"));
-                cabinets.get(i).add(1, results.getString("Cabinet"));
+                cabinets.get(i).add(1, results.getString("Cabinet")); //associates 'Y' or 'N' for the cabinets of the ID in question
 
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        hasDrawers = createHasArrays(drawers);
+        hasDrawers = createHasArrays(drawers); //creating the HasArrays
         hasCabinets = createHasArrays(cabinets);
         hasRails = createHasArrays(rails);
 
-        isEmpty = checkEmpty();
-        if (!isEmpty) {
+        isEmpty = checkEmpty(); //checking to make sure the HasArrays are not empty
+        if (!isEmpty) { //if not empty, then create combinations with the hasArrays
             orderCombos(this.numberOfItems);
         }
         else{
-            return;
+            return; //if the hasArrays are empty, then return back to main and do not make combinations
         }
     }
 
@@ -92,19 +92,19 @@ public class Filing {
     public void createCombinations() {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         int i = 0;
-        for (String s1 : hasRails) {
+        for (String s1 : hasRails) { //going through the specific hasArrays
             for (String s2 : hasCabinets) {
                 for (String s3 : hasDrawers) {
                     result.add(i, new ArrayList<>());
                     result.get(i).add(s1);
-                    result.get(i).add(s2);
+                    result.get(i).add(s2); //creating every type of combination
                     result.get(i).add(s3);
                     i++;
                 }
             }
         }
-        combinations= getRidofDuplicates(result);
-        selectPrice();
+        combinations= getRidofDuplicates(result); //getting rid of duplicate ID'S within each combination
+        selectPrice(); //finding the prices of each combination
     }
 
     /**
@@ -117,9 +117,9 @@ public class Filing {
             for (int i = 0; i < combinations.size(); i++) {
                 price.add(i, new ArrayList<>());
                 for (int j = 0; j < combinations.get(i).size(); j++) {
-                    results = myStmt.executeQuery("SELECT * FROM FILING WHERE ID = '" + combinations.get(i).get(j) + "'");
+                    results = myStmt.executeQuery("SELECT * FROM FILING WHERE ID = '" + combinations.get(i).get(j) + "'"); //get price of every element in combination
                     while (results.next()) {
-                        price.get(i).add(results.getString("Price"));
+                        price.get(i).add(results.getString("Price")); //create price array
                     }
                 }
             }
@@ -132,25 +132,27 @@ public class Filing {
      * @param num - number of orders
      */
     private void orderCombos(int num) {
-        if(num<1){
+        if(num<1){ //base case
             return;
         }
-        isEmpty = checkEmpty();
+
+        isEmpty = checkEmpty(); //checks if any of the hasArrays are empty and if no more combinations can be made
         if(isEmpty){
-            return;
+            return; //returns if any of them are empty
         }
-        combinations.clear();
-        price.clear();
-        createCombinations();
+        combinations.clear(); //clear the previous combinations from the order before
+        price.clear(); //clear the previous prices from the order before
+        createCombinations(); //creating the combinations and their prices
 
-        int orderPrice = findPriceAndCombo();
+        int orderPrice = findPriceAndCombo(); //calls function which finds the smallest order price
 
-        setSmallest(orderPrice);
-        addToOrder();
-        updateHasArrays(hasCabinets, orderCombo);
+        setSmallest(orderPrice); //calling setter method to set the smallest price
+        addToOrder(); //for multiple orders, this function will add on to the first generated combination
+
+        updateHasArrays(hasCabinets, orderCombo); //updating the hasArrays to remove used parts
         updateHasArrays(hasDrawers, orderCombo);
         updateHasArrays(hasRails, orderCombo);
-        orderCombos(num-1);
+        orderCombos(num-1); //decrementing the number of order for recursion
         return;
     }
 
@@ -165,16 +167,17 @@ public class Filing {
                 boolean used = false;
                 for(int c = 0; c<totalOrder.size();c++){
                     if(combinations.get(a).get(b).equals(totalOrder.get(c))){
-                        used = true;
+                        used = true; //for multiple orders, if an ID is reused for another part, this
+                                     //will ignore the price of that already used ID
                     }
                 }
                 if(!used) {
-                    sum = sum + Integer.parseInt(price.get(a).get(b));
+                    sum = sum + Integer.parseInt(price.get(a).get(b)); //if the ID has not been used in the previous combination, then add to the price
                 }
             }
             if(sum<cost){
-                cost = sum;
-                orderCombo = combinations.get(a).toArray(new String[0]);
+                cost = sum; 
+                orderCombo = combinations.get(a).toArray(new String[0]); //storing the combination with the lowest price
             }
         }
         return cost;
@@ -189,12 +192,12 @@ public class Filing {
         for(int i =0; i<this.orderCombo.length;i++){
             exists = false;
             for (int j =0; j<this.totalOrder.size();j++){
-                if(this.totalOrder.get(j).equals(this.orderCombo[i])){
-                    exists = true;
+                if(this.totalOrder.get(j).equals(this.orderCombo[i])){ //if ID already exists in totalOrder
+                    exists = true; //will not add the ID again
                 }
             }
             if(!exists){
-                this.totalOrder.add(this.orderCombo[i]);
+                this.totalOrder.add(this.orderCombo[i]); //add the combination for the current order number to the overall order combination
             }
         }
     }
