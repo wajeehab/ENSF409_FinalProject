@@ -4,10 +4,10 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: small filing, 1
+Original Request: ergonomic chair, 1
 
 Items Ordered
-ID: F006
-ID: F013
+ID: C5409
+ID: C4839
 
-Total Price: $100
+Total Price: $250
