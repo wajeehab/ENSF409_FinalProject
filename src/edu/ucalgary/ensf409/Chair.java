@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class gathers information from the Chair database
+ * This class gathers information from the Chair DATABASE
  * and finds the cheapest combination of items which will
  * create a whole chair, or multiple chairs
  */
 public class Chair {
-    private final InitializeConnection database = new InitializeConnection();
+    private final InitializeConnection DATABASE = new InitializeConnection();
     private ArrayList<String> hasLegs;
     private ArrayList<String> hasArms;
     private ArrayList<String> hasSeats;
@@ -26,22 +26,22 @@ public class Chair {
     private ArrayList<String> totalOrder = new ArrayList<>();
 
     /**
-     * Constructor method which initializes the database connection and takes in
+     * Constructor method which initializes the DATABASE connection and takes in
      * the number of chairs required for the order.
      *
      * @param numberItems - the  number of items required in the order
      */
     public Chair(int numberItems) {
-        database.Initialize();
-        dbConnect = database.getDbConnect();
+        DATABASE.Initialize();
+        dbConnect = DATABASE.getDbConnect();
         this.numberOfItems = numberItems; //initializes the number of items needed in that order
         this.smallest = 0; //initializing the smallest sum to zero
     }
 
     /**
-     * This function searches the Chair table in the inventory database
+     * This function searches the Chair table in the inventory DATABASE
      * and creates table which stores the ID and inventory of the items
-     * which match the given type. From the extracted inventory from the database,
+     * which match the given type. From the extracted inventory from the DATABASE,
      * HasArrays are created which store the ID's which have "Y" values for
      * specific parts.
      *
@@ -238,7 +238,7 @@ public class Chair {
     }
 
     /**This method creates hasArrays
-     * @param arr - the initial array which stores all inventory from the Database for a given ID
+     * @param arr - the initial array which stores all inventory from the DATABASE for a given ID
      * @return the correct hasArray which contains ID which contains the correct inventory for each part
      */
     public ArrayList<String> createHasArrays(ArrayList<ArrayList<String>> arr) {

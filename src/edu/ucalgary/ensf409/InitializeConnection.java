@@ -9,6 +9,7 @@ import java.sql.SQLException;
  */
 public class InitializeConnection {
     private Connection dbConnect;
+    
     public InitializeConnection(){}
 
     /**

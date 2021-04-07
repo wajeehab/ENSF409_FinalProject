@@ -10,15 +10,15 @@ import java.util.List;
  * and removes the ID's which have been used up
  */
 public class UpdateDatabase {
-    private final InitializeConnection database = new InitializeConnection();
+    private final InitializeConnection DATABASE = new InitializeConnection();
     private Connection dbConnect;
 
     /**
      * Constructor method which initializes the connection to the database
      */
     public UpdateDatabase(){
-        database.Initialize();
-        dbConnect = database.getDbConnect();
+        DATABASE.Initialize();
+        dbConnect = DATABASE.getDbConnect();
     }
 
     /**
