@@ -2,6 +2,8 @@ package edu.ucalgary.ensf409;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -114,6 +116,7 @@ public class Chair {
             }
         }
         combinations = getRidofDuplicates(result); //getting rid of duplicate ID'S within each combination
+        Collections.sort(combinations);
         selectPrice(); //finding the prices of each combination
     }
 

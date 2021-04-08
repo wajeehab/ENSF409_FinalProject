@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>JDBC:mysql://localhost/inventory</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="@localhost" uuid="8b840b6e-f3b3-4ae5-9586-f821511e0510">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost</jdbc-url>
+    </data-source>
   </component>
 </project>

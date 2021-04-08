@@ -9,7 +9,6 @@ import java.sql.SQLException;
  */
 public class InitializeConnection {
     private Connection dbConnect;
-    
     public InitializeConnection(){}
 
     /**
@@ -17,7 +16,7 @@ public class InitializeConnection {
      */
     public void Initialize() {
         try{
-            dbConnect = DriverManager.getConnection("JDBC:mysql://localhost/inventory","root","Hannan!2");
+            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/inventory","scm","ensf409");
         } catch (SQLException e) {
             e.printStackTrace();
         }
