@@ -30,7 +30,8 @@ public class LampTest {
     @Test
     public void findPriceAndComboTest() {
         
-        
+        Lamp newLamp = new Lamp(1);
+        newLamp.
     }
 
     @Test

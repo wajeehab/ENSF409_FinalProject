@@ -9,46 +9,133 @@ import java.sql.*;
 
 public class FilingTest {
 
-    // @Test
-    // public void createCombinationsTest() {
+    @Test
+    public void createCombinationsTest() {
         
-    //     Filing newFiling = new Filing(1);
-    //     newFiling.selectFilingInfo("Large");
+        Filing newFiling = new Filing(1);
+        newFiling.selectFilingInfo("Large");
 
-    //     ArrayList<ArrayList<String>> result = newFiling.getCombinations();
+        ArrayList<ArrayList<String>> result = newFiling.getCombinations();
 
-    //     ArrayList<ArrayList<String>> expected = new ArrayList<>();
-    //     expected.add(0, new ArrayList<>());
-    //     expected.add(1, new ArrayList<>());
-    //     expected.get(0).add(0, "C5784");
-    //     expected.get(0).add(1, "C2483");
-    //     expected.get(0).add(2, "C7268");
-    //     expected.get(1).add(0, "C2483");
-    //     expected.get(1).add(1, "C7268");
-    //     expected.get(1).add(2, "C5784");
+        ArrayList<ArrayList<String>> expected = new ArrayList<>();
+        expected.add(0, new ArrayList<>());
+        expected.add(1, new ArrayList<>());
+        expected.add(2, new ArrayList<>());
+        expected.add(3, new ArrayList<>());
+        expected.add(4, new ArrayList<>());
+        expected.add(5, new ArrayList<>());
+        expected.add(6, new ArrayList<>());
+        expected.add(7, new ArrayList<>());
+        expected.add(8, new ArrayList<>());
+        expected.add(9, new ArrayList<>());
+        expected.add(10, new ArrayList<>());
 
-    //     assertEquals("createCombinations did not give the proper result.",expected, result);
-    // }
+        expected.get(0).add(0, "F011");
+        expected.get(0).add(1, "F012");
+        expected.get(0).add(2, "F015");
 
-    // @Test
-    // public void selectPriceTest() {
+        expected.get(1).add(0, "F011");
+        expected.get(1).add(1, "F015");
+
+        expected.get(2).add(0, "F010");
+        expected.get(2).add(1, "F012");
+        expected.get(2).add(2, "F015");
+
+        expected.get(3).add(0, "F010");
+        expected.get(3).add(1, "F011");
+        expected.get(3).add(2, "F015");
+
+        expected.get(4).add(0, "F003");
+        expected.get(4).add(1, "F012");
+        expected.get(4).add(2, "F015");
+
+        expected.get(5).add(0, "F003");
+        expected.get(5).add(1, "F011");
+        expected.get(5).add(2, "F015");
+
+        expected.get(6).add(0, "F010");
+        expected.get(6).add(1, "F011");
+        expected.get(6).add(2, "F012");
+
+        expected.get(7).add(0, "F010");
+        expected.get(7).add(1, "F011");
+
+        expected.get(8).add(0, "F010");
+        expected.get(8).add(1, "F012");
+
+        expected.get(9).add(0, "F003");
+        expected.get(9).add(1, "F010");
+        expected.get(9).add(2, "F012");
+
+        expected.get(10).add(0, "F003");
+        expected.get(10).add(1, "F010");
+        expected.get(10).add(2, "F011");
+
+        assertEquals("createCombinations did not give the proper result.",expected, result);
+    }
+
+    @Test
+    public void selectPriceTest() {
         
-    //     Filing newFiling = new Filing(1);
-    //     newFiling.selectFilingInfo("Large");
-    //     ArrayList<ArrayList<String>> result = newFiling.getPrice();
+        Filing newFiling = new Filing(1);
+        newFiling.selectFilingInfo("Large");
+        ArrayList<ArrayList<String>> result = newFiling.getPrice();
 
-    //     ArrayList<ArrayList<String>> expected = new ArrayList<>();
-    //     expected.add(0, new ArrayList<>());
-    //     expected.add(1, new ArrayList<>());
-    //     expected.get(0).add(0, "150");
-    //     expected.get(0).add(1, "175");
-    //     expected.get(0).add(2, "75");
-    //     expected.get(1).add(0, "175");
-    //     expected.get(1).add(1, "75");
-    //     expected.get(1).add(2, "150");
+        ArrayList<ArrayList<String>> expected = new ArrayList<>();
+        expected.add(0, new ArrayList<>());
+        expected.add(1, new ArrayList<>());
+        expected.add(2, new ArrayList<>());
+        expected.add(3, new ArrayList<>());
+        expected.add(4, new ArrayList<>());
+        expected.add(5, new ArrayList<>());
+        expected.add(6, new ArrayList<>());
+        expected.add(7, new ArrayList<>());
+        expected.add(8, new ArrayList<>());
+        expected.add(9, new ArrayList<>());
+        expected.add(10, new ArrayList<>());
 
-    //     assertEquals("selectPrice did not set the proper values.",expected, result);
-    // }
+        expected.get(0).add(0, "225");
+        expected.get(0).add(1, "75");
+        expected.get(0).add(2, "75");
+
+        expected.get(1).add(0, "225");
+        expected.get(1).add(1, "75");
+
+        expected.get(2).add(0, "225");
+        expected.get(2).add(1, "75");
+        expected.get(2).add(2, "75");
+
+        expected.get(3).add(0, "225");
+        expected.get(3).add(1, "225");
+        expected.get(3).add(2, "75");
+
+        expected.get(4).add(0, "150");
+        expected.get(4).add(1, "75");
+        expected.get(4).add(2, "75");
+
+        expected.get(5).add(0, "150");
+        expected.get(5).add(1, "225");
+        expected.get(5).add(2, "75");
+
+        expected.get(6).add(0, "225");
+        expected.get(6).add(1, "225");
+        expected.get(6).add(2, "75");
+
+        expected.get(7).add(0, "225");
+        expected.get(7).add(1, "225");
+
+        expected.get(8).add(0, "225");
+        expected.get(8).add(1, "75");
+
+        expected.get(9).add(0, "150");
+        expected.get(9).add(1, "225");
+        expected.get(9).add(2, "75");
+
+        expected.get(10).add(0, "150");
+        expected.get(10).add(1, "225");
+        expected.get(10).add(2, "225");
+        assertEquals("selectPrice did not set the proper values.",expected, result);
+    }
 
     @Test
     public void orderCombosTest() {

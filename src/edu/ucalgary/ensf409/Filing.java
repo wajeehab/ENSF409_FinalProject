@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Filing {
     private final InitializeConnection DATABASE = new InitializeConnection();
@@ -217,6 +216,19 @@ public class Filing {
                 }
             }
         }
+        //NEW ------------------------------------------
+        for(int i = 0; i< combos.size(); i++) {
+            Collections.sort(combos.get(i));
+        }
+        for(int i = 0; i< combos.size()-1; i++) {
+            for(int j = i+1; j<combos.size(); j++) {
+                if(combos.get(i).equals(combos.get(j))) {
+                    combos.remove(j);
+                    j = j-1;
+                }
+            }
+        }
+        //-----------------------------------------------
         return combos;
     }
 
