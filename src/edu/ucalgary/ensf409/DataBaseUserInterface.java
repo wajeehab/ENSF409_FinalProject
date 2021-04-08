@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import java.util.Scanner;
 
@@ -13,7 +13,6 @@ public class DataBaseUserInterface {
         DBURL = reader.nextLine(); // Scans the next token of the input as an int.
         System.out.println("Enter DataBase username:  ");
         USERNAME= reader.nextLine(); // Scans the next token of the input as an int.
-
         System.out.println("Enter DataBase password:  ");
         PASSWORD = reader.nextLine(); // Scans the next token of the input as an int.
 

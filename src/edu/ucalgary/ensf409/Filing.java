@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -102,7 +102,7 @@ public class Filing {
                 }
             }
         }
-        combinations= getRidofDuplicates(result); //getting rid of duplicate ID'S within each combination
+        combinations = getRidofDuplicates(result); //getting rid of duplicate ID'S within each combination
         selectPrice(); //finding the prices of each combination
     }
 

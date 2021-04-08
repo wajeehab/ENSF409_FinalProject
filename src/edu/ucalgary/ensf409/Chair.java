@@ -1,10 +1,7 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class gathers information from the Chair DATABASE
@@ -118,7 +115,6 @@ public class Chair {
             }
         }
         combinations = getRidofDuplicates(result); //getting rid of duplicate ID'S within each combination
-        Collections.sort(combinations);
         selectPrice(); //finding the prices of each combination
     }
 
