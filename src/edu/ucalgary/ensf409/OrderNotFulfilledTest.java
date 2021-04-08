@@ -1,4 +1,4 @@
-package edu.ucalgary.ensf409;
+//package edu.ucalgary.ensf409;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -7,38 +7,46 @@ public class OrderNotFulfilledTest {
     
     @Test
     public void findChairManuTest() {
-        StringProcessor newTest = new StringProcessor("Test");
-        String result = newTest.idProcessing("Samuel", "Hannon", "Geo", 2015);
+        
+        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled();
+        String result = newOrderNotFulfilled.findChairManu();
 
-        String expResult = "SHG2015";
-        assertEquals("ID does not match expected ID", expResult, result);
+        String expected = "Office Furnishings, Fine Office Supplies, Chairs R Us";
+
+        assertEquals("findChairManu returns the proper String", expected, result);
     }
 
     @Test
     public void findLampManuTest() {
-        StringProcessor newTest = new StringProcessor("Test");
-        String result = newTest.idProcessing("Samuel", "Hannon", "Geo", 2015);
 
-        String expResult = "SHG2015";
-        assertEquals("ID does not match expected ID", expResult, result);
+        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled();
+        String result = newOrderNotFulfilled.findLampManu();
+
+        String expected = "Furniture Goods, Office Furnishings, Fine Office Supplies";
+
+        assertEquals("findLampManu returns the proper String", expected, result);
     }
 
     @Test
     public void findFilingManuTest() {
-        StringProcessor newTest = new StringProcessor("Test");
-        String result = newTest.idProcessing("Samuel", "Hannon", "Geo", 2015);
 
-        String expResult = "SHG2015";
-        assertEquals("ID does not match expected ID", expResult, result);
+        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled();
+        String result = newOrderNotFulfilled.findFilingManu();
+
+        String expected = "Furniture Goods, Fine Office Supplies, Office Furnishings";
+
+        assertEquals("findFilingManu returns the proper String", expected, result);
     }
 
     @Test
     public void findDeskManuTest() {
-        StringProcessor newTest = new StringProcessor("Test");
-        String result = newTest.idProcessing("Samuel", "Hannon", "Geo", 2015);
 
-        String expResult = "SHG2015";
-        assertEquals("ID does not match expected ID", expResult, result);
+        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled();
+        String result = newOrderNotFulfilled.findDeskManu();
+
+        String expected = "Office Furnishings, Fine Office Supplies, Academic Desks, Furniture Goods";
+
+        assertEquals("findDeskManu returns the proper String", expected, result);
     }
 
 }

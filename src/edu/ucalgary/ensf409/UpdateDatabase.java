@@ -26,7 +26,7 @@ public class UpdateDatabase {
      * @param idCombo - takes in combination of ID's which have been used in that order
      * @param table - the table from which the ID's need to be deleted
      */
-    public void deleteFromDataBase(List<String> idCombo, String table){
+    public void deleteFromDataBase(ArrayList<String> idCombo, String table){
         try {
             for(int i =0; i< idCombo.size();i++){
                 String query = "DELETE FROM " + table + " WHERE ID = ? ";

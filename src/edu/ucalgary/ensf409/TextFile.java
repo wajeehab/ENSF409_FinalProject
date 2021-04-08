@@ -22,7 +22,7 @@ public class TextFile {
      * @param price - the price of the combination
      * @param idCombo - the list which contains the ID's of the items which can complete the order
      */
-    public void writeOrderFulfilled(String type, String category, int amount, int price, List<String> idCombo) {
+    public void writeOrderFulfilled(String type, String category, int amount, int price, ArrayList<String> idCombo) {
         try {
             FileWriter myWriter = new FileWriter("orderform.txt");
             myWriter.write("Furniture Order Form");

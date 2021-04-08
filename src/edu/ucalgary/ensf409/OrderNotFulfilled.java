@@ -110,7 +110,7 @@ public class OrderNotFulfilled {
         StringJoiner str = new StringJoiner(", ");
         try {
             Statement myStmt = dbConnect.createStatement();
-            for(int i =0; i<chairId.size();i++) {
+            for(int i =0; i<deskId.size();i++) {
                 results = myStmt.executeQuery("SELECT * FROM  manufacturer  WHERE ManuID = '" + deskId.get(i) + "'");
                 while (results.next()) {
                     str.add(results.getString("Name"));

@@ -9,46 +9,103 @@ import java.sql.*;
 
 public class DeskTest {
 
-    // @Test
-    // public void createCombinationsTest() {
+    @Test
+    public void createCombinationsTest() {
         
-    //     Desk newDesk = new Desk(1);
-    //     newDesk.selectDeskInfo("Large");
+        Desk newDesk = new Desk(1);
+        newDesk.selectDeskInfo("Traditional");
 
-    //     ArrayList<ArrayList<String>> result = newDesk.getCombinations();
+        ArrayList<ArrayList<String>> result = newDesk.getCombinations();
 
-    //     ArrayList<ArrayList<String>> expected = new ArrayList<>();
-    //     expected.add(0, new ArrayList<>());
-    //     expected.add(1, new ArrayList<>());
-    //     expected.get(0).add(0, "C5784");
-    //     expected.get(0).add(1, "C2483");
-    //     expected.get(0).add(2, "C7268");
-    //     expected.get(1).add(0, "C2483");
-    //     expected.get(1).add(1, "C7268");
-    //     expected.get(1).add(2, "C5784");
+        ArrayList<ArrayList<String>> expected = new ArrayList<>();
+        expected.add(0, new ArrayList<>());
+        expected.add(1, new ArrayList<>());
+        expected.add(2, new ArrayList<>());
+        expected.add(3, new ArrayList<>());
+        expected.add(4, new ArrayList<>());
+        expected.add(5, new ArrayList<>());
+        expected.add(6, new ArrayList<>());
+        expected.add(7, new ArrayList<>());
 
-    //     assertEquals("createCombinations did not give the proper result.",expected, result);
-    // }
+        expected.get(0).add(0, "D8675");
+        expected.get(0).add(1, "D9352");
 
-    // @Test
-    // public void selectPriceTest() {
+        expected.get(1).add(0, "D4231");
+        expected.get(1).add(1, "D9352");
+
+        expected.get(2).add(0, "D4231");
+        expected.get(2).add(1, "D8675");
+        expected.get(2).add(2, "D9352");
+
+        expected.get(3).add(0, "D0890");
+        expected.get(3).add(1, "D8675");
+        expected.get(3).add(2, "D9352");
+
+        expected.get(4).add(0, "D0890");
+        expected.get(4).add(1, "D4231");
+        expected.get(4).add(2, "D9352");
+
+        expected.get(5).add(0, "D4231");
+        expected.get(5).add(1, "D8675");
+
+        expected.get(6).add(0, "D0890");
+        expected.get(6).add(1, "D8675");
+
+        expected.get(7).add(0, "D0890");
+        expected.get(7).add(1, "D4231");
+        expected.get(7).add(2, "D8675");
+
+
+        assertEquals("createCombinations did not give the proper result.",expected, result);
+    }
+
+    @Test
+    public void selectPriceTest() {
         
-    //     Desk newDesk = new Desk(1);
-    //     newDesk.selectDeskInfo("Large");
-    //     ArrayList<ArrayList<String>> result = newDesk.getPrice();
+        Desk newDesk = new Desk(1);
+        newDesk.selectDeskInfo("Traditional");
+        ArrayList<ArrayList<String>> result = newDesk.getPrice();
 
-    //     ArrayList<ArrayList<String>> expected = new ArrayList<>();
-    //     expected.add(0, new ArrayList<>());
-    //     expected.add(1, new ArrayList<>());
-    //     expected.get(0).add(0, "150");
-    //     expected.get(0).add(1, "175");
-    //     expected.get(0).add(2, "75");
-    //     expected.get(1).add(0, "175");
-    //     expected.get(1).add(1, "75");
-    //     expected.get(1).add(2, "150");
+        ArrayList<ArrayList<String>> expected = new ArrayList<>();
+        expected.add(0, new ArrayList<>());
+        expected.add(1, new ArrayList<>());
+        expected.add(2, new ArrayList<>());
+        expected.add(3, new ArrayList<>());
+        expected.add(4, new ArrayList<>());
+        expected.add(5, new ArrayList<>());
+        expected.add(6, new ArrayList<>());
+        expected.add(7, new ArrayList<>());
 
-    //     assertEquals("selectPrice did not set the proper values.",expected, result);
-    // }
+        expected.get(0).add(0, "75");
+        expected.get(0).add(1, "75");
+
+        expected.get(1).add(0, "50");
+        expected.get(1).add(1, "75");
+
+        expected.get(2).add(0, "50");
+        expected.get(2).add(1, "75");
+        expected.get(2).add(2, "75");
+
+        expected.get(3).add(0, "25");
+        expected.get(3).add(1, "75");
+        expected.get(3).add(2, "75");
+
+        expected.get(4).add(0, "25");
+        expected.get(4).add(1, "50");
+        expected.get(4).add(2, "75");
+
+        expected.get(5).add(0, "50");
+        expected.get(5).add(1, "75");
+
+        expected.get(6).add(0, "25");
+        expected.get(6).add(1, "75");
+
+        expected.get(7).add(0, "25");
+        expected.get(7).add(1, "50");
+        expected.get(7).add(2, "75");
+
+        assertEquals("selectPrice did not set the proper values.",expected, result);
+    }
 
     @Test
     public void orderCombosTest() {
