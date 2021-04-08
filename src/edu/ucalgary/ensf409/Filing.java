@@ -1,4 +1,4 @@
-package edu.ucalgary.ensf409;
+//package edu.ucalgary.ensf409;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Filing {
-    private final InitializeConnection database = new InitializeConnection();
+    private final InitializeConnection DATABASE = new InitializeConnection();
     private ArrayList<String> hasRails;
     private ArrayList<String>hasCabinets;
     private ArrayList<String> hasDrawers;
@@ -23,22 +23,22 @@ public class Filing {
     private ArrayList<String> totalOrder = new ArrayList<>();
 
     /**
-     * Constructor method which initializes the database connection and takes in
+     * Constructor method which initializes the DATABASE connection and takes in
      * the number of desks required for the order.
      *
      * @param numberItems - the  number of items required in the order
      */
     public Filing(int numberItems) {
-        database.Initialize();
-        dbConnect = database.getDbConnect();
+        DATABASE.Initialize();
+        dbConnect = DATABASE.getDbConnect();
         this.numberOfItems = numberItems; //initializes the number of items needed in that order
         this.smallest =0; //initializing the smallest sum to zero
     }
 
     /**
-     * This function searches the Desk table in the inventory database
+     * This function searches the Desk table in the inventory DATABASE
      * and creates table which stores the ID and inventory of the items
-     * which match the given type. From the extracted inventory from the database,
+     * which match the given type. From the extracted inventory from the DATABASE,
      * HasArrays are created which store the ID's which have "Y" values for
      * specific parts.
      *
@@ -131,7 +131,7 @@ public class Filing {
     /** This is a recursive method which finds the cheapest combination of parts for a given number of orders
      * @param num - number of orders
      */
-    private void orderCombos(int num) {
+    public void orderCombos(int num) {
         if(num<1){ //base case
             return;
         }
@@ -224,12 +224,12 @@ public class Filing {
     /** This method checks the size of the hasArrays and returns true or false
      * @return true or false
      */
-    private boolean checkEmpty() {
+    public boolean checkEmpty() {
         return hasDrawers.size() == 0| hasCabinets.size() == 0 | hasRails.size() == 0;
     }
 
     /**This method creates hasArrays
-     * @param arr - the initial array which stores all inventory from the Database for a given ID
+     * @param arr - the initial array which stores all inventory from the DATABASE for a given ID
      * @return the correct hasArray which contains ID which contains the correct inventory for each part
      */
     public ArrayList<String> createHasArrays(ArrayList<ArrayList<String>> arr) {
@@ -271,8 +271,24 @@ public class Filing {
      * getter method for the combination which makes the cheapest order
      * @return
      */
-    public List<String> getIdCombo() {
+    public ArrayList<String> getIdCombo() {
         return totalOrder;
+    }
+
+    /**
+     * getter method for the price array **NEW**
+     * @return
+     */
+    public ArrayList<ArrayList<String>> getPrice() {
+        return price;
+    }
+
+    /**
+     * getter method for the combinations array **NEW**
+     * @return
+     */
+    public ArrayList<ArrayList<String>> getCombinations() {
+        return combinations;
     }
 
     /**

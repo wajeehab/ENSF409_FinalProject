@@ -1,4 +1,4 @@
-package edu.ucalgary.ensf409;
+//package edu.ucalgary.ensf409;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +22,7 @@ public class TextFile {
      * @param price - the price of the combination
      * @param idCombo - the list which contains the ID's of the items which can complete the order
      */
-    public void WriteOrderFulfilled(String type, String category, int amount, int price, List<String> idCombo) {
+    public void writeOrderFulfilled(String type, String category, int amount, int price, List<String> idCombo) {
         try {
             FileWriter myWriter = new FileWriter("orderform.txt");
             myWriter.write("Furniture Order Form");
@@ -62,7 +62,7 @@ public class TextFile {
      * @param amount - the amount of items from user input
      * @param manuNames - the manufacturer names for the required furniture category
      */
-    public void WriteNotFulfilled(String type, String category, int amount, String manuNames) {
+    public void writeNotFulfilled(String type, String category, int amount, String manuNames) {
         try {
             FileWriter myWriter = new FileWriter("orderform.txt");
             myWriter.write("Furniture Order Form");
@@ -84,6 +84,5 @@ public class TextFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -1,4 +1,4 @@
-package edu.ucalgary.ensf409;
+//package edu.ucalgary.ensf409;
 
 import java.util.Scanner;
 
@@ -45,11 +45,11 @@ public class OrderUserInterface {
             chair = new Chair(getNumberItems()); //instantiating the class
             chair.selectChairInfo(getFurnitureType()); //creating the combinations
             if(!chair.getIsEmpty()) { //if combinations were created successfully
-                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest(), chair.getIdCombo()); //write to order fulfilled text file
+                text.writeOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest(), chair.getIdCombo()); //write to order fulfilled text file
                 update.deleteFromDataBase(chair.getIdCombo(), getFurnitureCategory()); //update database
             }
             else if (chair.getIsEmpty()){ //if combinations not created
-                text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findChairManu()); //write to order not fulfilled and find the furniture manufacturers
+                text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findChairManu()); //write to order not fulfilled and find the furniture manufacturers
             }
 
         }
@@ -58,11 +58,11 @@ public class OrderUserInterface {
              desk = new Desk(getNumberItems()); //instantiating the class
              desk.selectDeskInfo(getFurnitureType()); //creating the combinations
             if(!desk.getIsEmpty()) { //if combinations were created successfully
-                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), desk.getSmallest(), desk.getIdCombo()); //write to order fulfilled text file
+                text.writeOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), desk.getSmallest(), desk.getIdCombo()); //write to order fulfilled text file
                 update.deleteFromDataBase(desk.getIdCombo(), getFurnitureCategory());//update database
             }
             else if (desk.getIsEmpty()){ //if combinations not created
-                text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findDeskManu()); //write to order not fulfilled and find the furniture manufacturer
+                text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findDeskManu()); //write to order not fulfilled and find the furniture manufacturer
             }
         }
 //
@@ -70,22 +70,22 @@ public class OrderUserInterface {
             filing = new Filing(getNumberItems()); //instantiating the class
             filing.selectFilingInfo(getFurnitureType()); //creating the combinations
             if(!filing.getIsEmpty()) { //if combinations were created successfully
-                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), filing.getSmallest(), filing.getIdCombo()); //write to order fulfilled text file
+                text.writeOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), filing.getSmallest(), filing.getIdCombo()); //write to order fulfilled text file
                 update.deleteFromDataBase(filing.getIdCombo(), getFurnitureCategory());
             }
             else if (filing.getIsEmpty()){//if combinations not created
-                text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findFilingManu()); //write to order not fulfilled and find the furniture manufacturer
+                text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findFilingManu()); //write to order not fulfilled and find the furniture manufacturer
             }        }
 //
         else if(getFurnitureCategory().equals("lamp") | (getFurnitureCategory().equals("Lamp"))){
             lamp = new Lamp (getNumberItems()); //instantiating the class
             lamp.selectLampInfo(getFurnitureType()); //creating the combinations
             if(!lamp.getIsEmpty()) {  //if orders can be made, write to text file and
-                text.WriteOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo()); //write to order fulfilled text file
+                text.writeOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo()); //write to order fulfilled text file
                 update.deleteFromDataBase(lamp.getIdCombo(), getFurnitureCategory());
             }
             else if (lamp.getIsEmpty()){//if combinations not created
-                text.WriteNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findLampManu()); //write to order not fulfilled and find the furniture manufacturer
+                text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findLampManu()); //write to order not fulfilled and find the furniture manufacturer
             }
 
         }

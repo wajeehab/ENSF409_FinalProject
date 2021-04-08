@@ -1,4 +1,4 @@
-package edu.ucalgary.ensf409;
+//package edu.ucalgary.ensf409;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class Lamp {
-    private final InitializeConnection database = new InitializeConnection();
+    private final InitializeConnection DATABASE = new InitializeConnection();
     private ArrayList<ArrayList<String>> hasBase;
     private ArrayList<ArrayList<String>> hasBulb;
     private ArrayList<String> combinations = new ArrayList<>();
@@ -19,22 +19,22 @@ public class Lamp {
     private int numberOfItems;
 
     /**
-     * Constructor method which initializes the database connection and takes in
+     * Constructor method which initializes the DATABASE connection and takes in
      * the number of desks required for the order.
      *
      * @param numberItems - the  number of items required in the order
      */
     public Lamp (int numberItems) {
-        database.Initialize();
-        dbConnect = database.getDbConnect();
+        DATABASE.Initialize();
+        dbConnect = DATABASE.getDbConnect();
         this.numberOfItems = numberItems; //initializes the number of items needed in that order
         this.smallest =0; //initializing the smallest sum to zero
     }
 
     /**
-     * This function searches the Desk table in the inventory database
+     * This function searches the Desk table in the inventory DATABASE
      * and creates table which stores the ID and inventory of the items
-     * which match the given type. From the extracted inventory from the database,
+     * which match the given type. From the extracted inventory from the DATABASE,
      * HasArrays are created which store the ID's which have "Y" values for
      * specific parts.
      *
@@ -80,7 +80,7 @@ public class Lamp {
     }
 
     /**This method creates hasArrays
-     * @param arr - the initial array which stores all inventory from the Database for a given ID
+     * @param arr - the initial array which stores all inventory from the DATABASE for a given ID
      * @return the correct hasArray which contains ID which contains the correct inventory for each part
      */
     public ArrayList<ArrayList<String>> createHasArrays(ArrayList<ArrayList<String>> arr) {

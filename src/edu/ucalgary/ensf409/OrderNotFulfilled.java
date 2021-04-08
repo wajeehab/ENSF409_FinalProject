@@ -1,4 +1,4 @@
-package edu.ucalgary.ensf409;
+//package edu.ucalgary.ensf409;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.StringJoiner;
 
 public class OrderNotFulfilled {
-    private final InitializeConnection database = new InitializeConnection();
+    private final InitializeConnection DATABASE = new InitializeConnection();
     private Connection dbConnect;
     private ArrayList<String> chairId = new ArrayList<>();
     private ArrayList<String> deskId = new ArrayList<>();
@@ -17,12 +17,12 @@ public class OrderNotFulfilled {
     private ResultSet results;
 
     /**
-     * constructor method which initializes the database connection and
+     * constructor method which initializes the DATABASE connection and
      * initializes the Id arrays with their respective manufacturer ID's
      */
     public OrderNotFulfilled() {
-        database.Initialize();
-        dbConnect = database.getDbConnect();
+        DATABASE.Initialize();
+        dbConnect = DATABASE.getDbConnect();
 
         chairId.add("002");
         chairId.add("005");
