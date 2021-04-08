@@ -8,30 +8,63 @@ import org.junit.*;
 import java.sql.*;
 
 public class LampTest {
-    
-    @Test
-    public void selectLampInfoTest() {
-        
-        
-    }
 
     @Test
     public void createHasArraysTest() {
         
-        
+        ArrayList<ArrayList<String>> testArray = new ArrayList<>();
+        testArray.add(0, new ArrayList<>());
+        testArray.add(1, new ArrayList<>());
+        testArray.add(2, new ArrayList<>());
+        testArray.get(0).add(0, "L013");
+        testArray.get(0).add(1, "Y");
+        testArray.get(0).add(2, "18");
+        testArray.get(1).add(0, "L342");
+        testArray.get(1).add(1, "N");
+        testArray.get(1).add(2, "2");
+        testArray.get(2).add(0, "L564");
+        testArray.get(2).add(1, "Y");
+        testArray.get(2).add(2, "20");
+
+
+        Lamp newLamp = new Lamp(1);
+        ArrayList<ArrayList<String>> result = newLamp.createHasArrays(testArray);
+
+        ArrayList<ArrayList<String>> expectedHasArray = new ArrayList<>();
+        expectedHasArray.add(0, new ArrayList<>());
+        expectedHasArray.add(1, new ArrayList<>());
+        expectedHasArray.get(0).add(0, "L013");
+        expectedHasArray.get(0).add(1, "18");
+        expectedHasArray.get(1).add(0, "L564");
+        expectedHasArray.get(1).add(1, "20");
+
+
+        assertEquals("createHasArrays did not provide the expected hasArray ArrayList.", expectedHasArray, result);
+
     }
 
     @Test
     public void orderCombosTest() {
         
-        
+        Lamp newLamp = new Lamp(2);
+        //newLamp.findPriceAndCombo();
+        newLamp.selectLampInfo("desk");
+        int result = newLamp.getSmallest();
+        int expected = 40;
+
+        assertEquals("findPriceAndCombo did not return the lowest price", expected, result);
     }
 
     @Test
     public void findPriceAndComboTest() {
         
         Lamp newLamp = new Lamp(1);
-        newLamp.
+        //newLamp.findPriceAndCombo();
+        newLamp.selectLampInfo("desk");
+        int result = newLamp.getSmallest();
+        int expected = 20;
+
+        assertEquals("findPriceAndCombo did not return the lowest price", expected, result);
     }
 
     @Test
