@@ -28,7 +28,7 @@ public class UpdateDatabaseTest {
     @Before
     public void addDeletedValuesBack() {
         InitializeConnection connection = new InitializeConnection();
-        connection.Initialize();
+        connection.Initialize("jdbc:mysql://localhost/inventory", "scm", "ensf409");
         try {
             String query = "INSERT INTO DESK (ID, Type, Legs, Top, Drawer, Price, ManuID) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement myStmt = connection.getDbConnect().prepareStatement(query);
@@ -55,7 +55,7 @@ public class UpdateDatabaseTest {
      */
     @Test
     public void deleteFromDataBaseTest() {
-        UpdateDatabase update = new UpdateDatabase();
+        UpdateDatabase update = new UpdateDatabase("jdbc:mysql://localhost/inventory", "scm", "ensf409");
         ResultSet results;
         ArrayList<String> idCombo = new ArrayList<>();
         ArrayList<String> expected = new ArrayList<>();

@@ -18,8 +18,8 @@ public class UpdateDatabase {
     /**
      * Constructor method which initializes the connection to the database
      */
-    public UpdateDatabase(){
-        DATABASE.Initialize();
+    public UpdateDatabase(String user, String url, String password){
+        DATABASE.Initialize(user, url, password);
         dbConnect = DATABASE.getDbConnect();
     }
 

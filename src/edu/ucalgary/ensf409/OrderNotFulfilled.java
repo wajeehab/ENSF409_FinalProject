@@ -20,8 +20,8 @@ public class OrderNotFulfilled {
      * constructor method which initializes the DATABASE connection and
      * initializes the Id arrays with their respective manufacturer ID's
      */
-    public OrderNotFulfilled() {
-        DATABASE.Initialize();
+    public OrderNotFulfilled(String user, String url, String password) {
+        DATABASE.Initialize(user, url, password);
         dbConnect = DATABASE.getDbConnect();
 
         chairId.add("002");

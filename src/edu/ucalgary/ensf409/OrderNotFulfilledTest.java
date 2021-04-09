@@ -18,7 +18,7 @@ public class OrderNotFulfilledTest {
     @Test
     public void findChairManuTest() {
         
-        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled();
+        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled("jdbc:mysql://localhost/inventory", "scm", "ensf409");
         String result = newOrderNotFulfilled.findChairManu();
 
         String expected = "Office Furnishings, Fine Office Supplies, Chairs R Us";
@@ -34,7 +34,7 @@ public class OrderNotFulfilledTest {
     @Test
     public void findLampManuTest() {
 
-        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled();
+        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled("jdbc:mysql://localhost/inventory", "scm", "ensf409");
         String result = newOrderNotFulfilled.findLampManu();
 
         String expected = "Furniture Goods, Office Furnishings, Fine Office Supplies";
@@ -50,7 +50,7 @@ public class OrderNotFulfilledTest {
     @Test
     public void findFilingManuTest() {
 
-        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled();
+        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled("jdbc:mysql://localhost/inventory", "scm", "ensf409");
         String result = newOrderNotFulfilled.findFilingManu();
 
         String expected = "Furniture Goods, Fine Office Supplies, Office Furnishings";
@@ -66,7 +66,7 @@ public class OrderNotFulfilledTest {
     @Test
     public void findDeskManuTest() {
 
-        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled();
+        OrderNotFulfilled newOrderNotFulfilled = new OrderNotFulfilled("jdbc:mysql://localhost/inventory", "scm", "ensf409");
         String result = newOrderNotFulfilled.findDeskManu();
 
         String expected = "Office Furnishings, Fine Office Supplies, Academic Desks, Furniture Goods";

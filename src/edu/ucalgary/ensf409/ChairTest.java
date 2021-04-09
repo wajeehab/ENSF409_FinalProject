@@ -22,7 +22,7 @@ public class ChairTest {
     @Test
     public void createCombinationsTest() {
         
-        Chair newChair = new Chair(1);
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newChair.selectChairInfo("Executive");
 
         ArrayList<ArrayList<String>> result = newChair.getCombinations();
@@ -47,7 +47,7 @@ public class ChairTest {
     @Test
     public void selectPriceTest() {
         
-        Chair newChair = new Chair(1);
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newChair.selectChairInfo("Executive");
         ArrayList<ArrayList<String>> result = newChair.getPrice();
 
@@ -69,7 +69,7 @@ public class ChairTest {
      */
     @Test
     public void orderCombosTest() {
-        Chair newChair = new Chair(2);
+        Chair newChair = new Chair(2,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newChair.selectChairInfo("Mesh");
 
         int result = newChair.getSmallest();
@@ -85,7 +85,7 @@ public class ChairTest {
      */
     @Test
     public void findPriceAndComboTest() {
-        Chair newChair = new Chair(1);
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newChair.selectChairInfo("Mesh");
         int result = newChair.getSmallest();
 
@@ -103,13 +103,13 @@ public class ChairTest {
     public void addToOrderTest() {
 
         //generating the correct from the program
-        Chair newChair = new Chair(1);
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newChair.selectChairInfo("Mesh");
         ArrayList<String> result = newChair.getIdCombo();
 
 //
 //        //hardcoding in the expected to make sure the addToOrder method works properly on its own
-        Chair expectedChair= new Chair(1);
+        Chair expectedChair= new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         String [] newComboId = {"C6748"};
         expectedChair.setOrderCombo(newComboId);
         ArrayList<String> newAddition = new ArrayList<>();
@@ -148,7 +148,7 @@ public class ChairTest {
         testArray.get(1).add(2, "C1013");
         testArray.get(1).add(3, "C1014");
 
-        Chair newChair = new Chair(1);
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         ArrayList<ArrayList<String>> result = newChair.getRidofDuplicates(testArray);
 
         ArrayList<ArrayList<String>> expected = new ArrayList<>();
@@ -173,10 +173,15 @@ public class ChairTest {
     @Test
     public void checkEmptyTest() {
 
+<<<<<<< Updated upstream
         Chair newChair = new Chair(1);
         //After running through and creating an order, 
         //one of the hasArrays for chair should become empty.
         newChair.selectChairInfo("mesh"); 
+=======
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
+        newChair.selectChairInfo("mesh"); //after running through and creating an order, one of the hasArrays for chair should become empty
+>>>>>>> Stashed changes
         boolean x = newChair.checkEmpty();
 
         boolean expected = true;
@@ -203,7 +208,7 @@ public class ChairTest {
         testArray.get(2).add(0, "C1012");
         testArray.get(2).add(1, "Y");
 
-        Chair newChair = new Chair(1);
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         ArrayList<String> result = newChair.createHasArrays(testArray);
 
         ArrayList<String> expectedHasArray = new ArrayList<>();
@@ -229,7 +234,7 @@ public class ChairTest {
         newHasArray.add("C4501");
         String[] newIDs = {"C3400", "C4400"};
         
-        Chair newChair = new Chair(1); 
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newChair.updateHasArrays(newHasArray, newIDs);
 
         ArrayList<String> expected = new ArrayList<>();

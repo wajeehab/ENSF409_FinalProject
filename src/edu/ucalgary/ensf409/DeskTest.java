@@ -25,7 +25,7 @@ public class DeskTest {
     @Test
     public void createCombinationsTest() {
         
-        Desk newDesk = new Desk(1);
+        Desk newDesk = new Desk(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newDesk.selectDeskInfo("Traditional");
 
         ArrayList<ArrayList<String>> result = newDesk.getCombinations();
@@ -86,7 +86,7 @@ public class DeskTest {
     @Test
     public void selectPriceTest() {
         
-        Desk newDesk = new Desk(1);
+        Desk newDesk = new Desk(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newDesk.selectDeskInfo("Traditional");
         ArrayList<ArrayList<String>> result = newDesk.getPrice();
 
@@ -143,7 +143,7 @@ public class DeskTest {
     @Test
     public void orderCombosTest() {
 
-        Desk newDesk = new Desk(2);
+        Desk newDesk = new Desk(2,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newDesk.selectDeskInfo("Standing");
 
         int result = newDesk.getSmallest();
@@ -159,7 +159,7 @@ public class DeskTest {
      */
     @Test
     public void findPriceAndComboTest() {
-        Desk newDesk = new Desk(1);
+        Desk newDesk = new Desk(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newDesk.selectDeskInfo("Standing");
         int result = newDesk.getSmallest();
 
@@ -177,12 +177,12 @@ public class DeskTest {
     public void addToOrderTest() {
 
         //generating the correct from the program
-        Desk newDesk = new Desk(1);
+        Desk newDesk = new Desk(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newDesk.selectDeskInfo("standing");
         ArrayList<String> result = newDesk.getIdCombo();
 
         //hardcoding in the expected to make sure the addToOrder method works properly on its own
-        Desk expectedDesk = new Desk(1);
+        Desk expectedDesk = new Desk(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         String [] newComboId = {"D3820"};
         expectedDesk.setOrderCombo(newComboId);
         ArrayList<String> newAddition = new ArrayList<>();
@@ -220,7 +220,7 @@ public class DeskTest {
         testArray.get(1).add(2, "C1013");
         testArray.get(1).add(3, "C1014");
 
-        Desk newDesk = new Desk(1);
+        Desk newDesk = new Desk(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         ArrayList<ArrayList<String>> result = newDesk.getRidofDuplicates(testArray);
 
         ArrayList<ArrayList<String>> expected = new ArrayList<>();
@@ -245,7 +245,7 @@ public class DeskTest {
     @Test
     public void checkEmptyTest() {
 
-        Desk newDesk = new Desk(1);
+        Desk newDesk = new Desk(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newDesk.selectDeskInfo("Standing");
         boolean x = newDesk.checkEmpty();
         
@@ -274,7 +274,7 @@ public class DeskTest {
         testArray.get(2).add(0, "C1012");
         testArray.get(2).add(1, "Y");
 
-        Desk newDesk = new Desk(1);
+        Desk newDesk = new Desk(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         ArrayList<String> result = newDesk.createHasArrays(testArray);
 
         ArrayList<String> expectedHasArray = new ArrayList<>();
@@ -300,7 +300,7 @@ public class DeskTest {
         newHasArray.add("C4501");
         String[] newIDs = {"C3400", "C4400"};
         
-        Desk newDesk = new Desk(1); 
+        Desk newDesk = new Desk(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newDesk.updateHasArrays(newHasArray, newIDs);
 
         ArrayList<String> expected = new ArrayList<>();

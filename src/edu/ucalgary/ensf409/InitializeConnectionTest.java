@@ -13,9 +13,8 @@ public class InitializeConnectionTest {
     
     @Test
     public void InitializeTest() {
-        
         InitializeConnection newInitializeConnection = new InitializeConnection();
-        newInitializeConnection.Initialize();
+        newInitializeConnection.Initialize("jdbc:mysql://localhost/inventory", "scm", "ensf409");
         Connection newConnect = newInitializeConnection.getDbConnect();
         ResultSet results;
         String[] results2 = new String[5];
@@ -38,7 +37,7 @@ public class InitializeConnectionTest {
     }
     @Test
     public void TestClose() throws SQLException {
-        Chair newChair = new Chair(1);
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newChair.selectChairInfo("mesh");
         Connection newConnect = newChair.getDbConnect();
         newChair.close();

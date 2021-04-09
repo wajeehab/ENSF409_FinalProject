@@ -37,7 +37,7 @@ public class LampTest {
         testArray.get(2).add(2, "20");
 
 
-        Lamp newLamp = new Lamp(1);
+        Lamp newLamp = new Lamp(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         ArrayList<ArrayList<String>> result = newLamp.createHasArrays(testArray);
 
         ArrayList<ArrayList<String>> expectedHasArray = new ArrayList<>();
@@ -61,7 +61,7 @@ public class LampTest {
     @Test
     public void orderCombosTest() {
         
-        Lamp newLamp = new Lamp(2);
+        Lamp newLamp = new Lamp(2,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newLamp.selectLampInfo("desk");
         int result = newLamp.getSmallest();
         int expected = 40;
@@ -77,7 +77,7 @@ public class LampTest {
     @Test
     public void findPriceAndComboTest() {
         
-        Lamp newLamp = new Lamp(1);
+        Lamp newLamp = new Lamp(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newLamp.selectLampInfo("desk");
         int result = newLamp.getSmallest();
         int expected = 20;
@@ -109,7 +109,7 @@ public class LampTest {
         newIDs.add("C3400");
         newIDs.add("C3401");
         
-        Lamp newLamp = new Lamp(1); 
+        Lamp newLamp = new Lamp(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newLamp.updateHasArrays(newHasArray, newIDs);
 
         ArrayList<ArrayList<String>> expected = new ArrayList<>();
@@ -132,7 +132,7 @@ public class LampTest {
     @Test
     public void checkEmptyTest() {
         
-        Lamp newLamp = new Lamp(1);
+        Lamp newLamp = new Lamp(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newLamp.selectLampInfo("Desk");
         boolean x = newLamp.checkEmpty();
         

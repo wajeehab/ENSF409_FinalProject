@@ -30,8 +30,8 @@ public class Desk {
      *
      * @param numberItems - the  number of items required in the order
      */
-        public Desk(int numberItems) {
-            DATABASE.Initialize();
+        public Desk(int numberItems, String url, String user, String password) {
+            DATABASE.Initialize(url, user, password);
             dbConnect = DATABASE.getDbConnect();
             this.numberOfItems = numberItems; //initializes the number of items needed in that order
             this.smallest =0; //initializing the smallest sum to zero

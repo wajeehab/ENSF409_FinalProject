@@ -25,7 +25,7 @@ public class FilingTest {
     @Test
     public void createCombinationsTest() {
         
-        Filing newFiling = new Filing(1);
+        Filing newFiling = new Filing(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newFiling.selectFilingInfo("Large");
 
         ArrayList<ArrayList<String>> result = newFiling.getCombinations();
@@ -98,7 +98,7 @@ public class FilingTest {
     @Test
     public void selectPriceTest() {
         
-        Filing newFiling = new Filing(1);
+        Filing newFiling = new Filing(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newFiling.selectFilingInfo("Large");
         ArrayList<ArrayList<String>> result = newFiling.getPrice();
 
@@ -167,7 +167,7 @@ public class FilingTest {
     public void orderCombosTest() {
         
 
-        Filing newFiling = new Filing(2);
+        Filing newFiling = new Filing(2,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newFiling.selectFilingInfo("Medium");
 
         int result = newFiling.getSmallest();
@@ -183,7 +183,7 @@ public class FilingTest {
      */
     @Test
     public void findPriceAndComboTest() {
-        Filing newFiling = new Filing(1);
+        Filing newFiling = new Filing(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newFiling.selectFilingInfo("Medium");
         int result = newFiling.getSmallest();
 
@@ -200,12 +200,12 @@ public class FilingTest {
     @Test
     public void addToOrderTest() {
         //generating the correct from the program
-        Filing newFiling = new Filing(2);
+        Filing newFiling = new Filing(2,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newFiling.selectFilingInfo("medium");
         ArrayList<String> result = newFiling.getIdCombo();
 
         //hardcoding in the expected to make sure the addToOrder method works properly on its own
-        Filing expectedFiling= new Filing(2);
+        Filing expectedFiling= new Filing(2,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         String [] newComboId = {"F014"};
         expectedFiling.setOrderCombo(newComboId);
         ArrayList<String> newAddition = new ArrayList<>();
@@ -244,7 +244,7 @@ public class FilingTest {
         testArray.get(1).add(2, "C1013");
         testArray.get(1).add(3, "C1014");
 
-        Filing newFiling = new Filing(1);
+        Filing newFiling = new Filing(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         ArrayList<ArrayList<String>> result = newFiling.getRidofDuplicates(testArray);
 
         ArrayList<ArrayList<String>> expected = new ArrayList<>();
@@ -269,7 +269,7 @@ public class FilingTest {
     @Test
     public void checkEmptyTest() {
 
-        Filing newFiling = new Filing(1);
+        Filing newFiling = new Filing(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newFiling.selectFilingInfo("Medium");
         boolean x = newFiling.checkEmpty();
         
@@ -298,7 +298,7 @@ public class FilingTest {
         testArray.get(2).add(0, "C1012");
         testArray.get(2).add(1, "Y");
 
-        Filing newFiling = new Filing(1);
+        Filing newFiling = new Filing(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         ArrayList<String> result = newFiling.createHasArrays(testArray);
 
         ArrayList<String> expectedHasArray = new ArrayList<>();
@@ -324,7 +324,7 @@ public class FilingTest {
         newHasArray.add("C4501");
         String[] newIDs = {"C3400", "C4400"};
         
-        Filing newFiling = new Filing(1); 
+        Filing newFiling = new Filing(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         newFiling.updateHasArrays(newHasArray, newIDs);
 
         ArrayList<String> expected = new ArrayList<>();

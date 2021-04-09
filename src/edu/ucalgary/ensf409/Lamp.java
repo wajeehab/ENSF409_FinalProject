@@ -24,8 +24,8 @@ public class Lamp {
      *
      * @param numberItems - the  number of items required in the order
      */
-    public Lamp (int numberItems) {
-        DATABASE.Initialize();
+    public Lamp (int numberItems, String user, String url, String password) {
+        DATABASE.Initialize(user, url, password);
         dbConnect = DATABASE.getDbConnect();
         this.numberOfItems = numberItems; //initializes the number of items needed in that order
         this.smallest =0; //initializing the smallest sum to zero

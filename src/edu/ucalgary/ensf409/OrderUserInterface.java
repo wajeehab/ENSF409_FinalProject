@@ -15,8 +15,11 @@ public class OrderUserInterface {
     private Desk desk;
     private Filing filing;
     private TextFile text = new TextFile();
-    private UpdateDatabase update = new UpdateDatabase();
-    private OrderNotFulfilled orderN = new OrderNotFulfilled();
+    private UpdateDatabase update;
+    private OrderNotFulfilled orderN;
+    private String DBURL; //store the database url information
+    private String USERNAME; //store the user's account username
+    private String PASSWORD;
 
     /**
      * empty constructor
@@ -24,13 +27,18 @@ public class OrderUserInterface {
 
     public OrderUserInterface(){ }
 
-
     /**
      * This function prompts the user for furniture category, type and number of items
      * which they want constructed and stores the input.
      */
     public void startProgram(){
         Scanner reader = new Scanner(System.in);  // Reading from System.in
+        System.out.println("Enter DataBase URL:  ");
+        DBURL = reader.nextLine(); // Scans the next token of the input as an int.
+        System.out.println("Enter DataBase username:  ");
+        USERNAME= reader.nextLine(); // Scans the next token of the input as an int.
+        System.out.println("Enter DataBase password:  ");
+        PASSWORD = reader.nextLine(); // Scans the next token of the input as an int.  //        Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Enter furniture category:  ");
         setFurnitureCategory(reader.nextLine()); //Scans the next token of the input as a String
 
@@ -49,59 +57,74 @@ public class OrderUserInterface {
      */
     public void selectFurnitureCategory(){
         if (checkChairInput(getFurnitureCategory(), getFurnitureType())) { //if user input matches
-            chair = new Chair(getNumberItems()); //instantiating the class
+            chair = new Chair(getNumberItems(), getDburl(), getUsername(), getPassword());
+            update = new UpdateDatabase(getDburl(), getUsername(), getPassword());
+            orderN = new OrderNotFulfilled(getDburl(), getUsername(), getPassword());
             chair.selectChairInfo(getFurnitureType()); //creating the combinations
-            if(!chair.getIsEmpty()) { //if combinations were created successfully
+            if(!chair.getIsEmpty()) {
                 text.writeOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), chair.getSmallest(), chair.getIdCombo()); //write to order fulfilled text file
                 update.deleteFromDataBase(chair.getIdCombo(), getFurnitureCategory()); //update database
+                update.close();
             }
-            else if (chair.getIsEmpty()){ //if combinations not created
+            else if (chair.getIsEmpty()){
                 text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findChairManu()); //write to order not fulfilled and find the furniture manufacturers
+                orderN.close();
             }
-            chair.close();
+            chair.close(); //closing the connections
         }
 
         else if (checkDeskInput(getFurnitureCategory(), getFurnitureType())){
-             desk = new Desk(getNumberItems()); //instantiating the class
+             desk = new Desk(getNumberItems(), getDburl(), getUsername(), getPassword()); //instantiating the class
              desk.selectDeskInfo(getFurnitureType()); //creating the combinations
-            if(!desk.getIsEmpty()) { //if combinations were created successfully
+            update = new UpdateDatabase(getDburl(), getUsername(), getPassword());
+            orderN = new OrderNotFulfilled(getDburl(), getUsername(), getPassword());
+            if(!desk.getIsEmpty()) {
                 text.writeOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), desk.getSmallest(), desk.getIdCombo()); //write to order fulfilled text file
                 update.deleteFromDataBase(desk.getIdCombo(), getFurnitureCategory());//update database
+                update.close();
+
             }
-            else if (desk.getIsEmpty()){ //if combinations not created
+            else if (desk.getIsEmpty()){
                 text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findDeskManu()); //write to order not fulfilled and find the furniture manufacturer
+                orderN.close();
             }
 
-            desk.close();
-            update.close();
+            desk.close(); //closing the connections
         }
 //
         else if(checkFilingInput(getFurnitureCategory(), getFurnitureType())){
-            filing = new Filing(getNumberItems()); //instantiating the class
+            filing = new Filing(getNumberItems(), getDburl(), getUsername(), getPassword()); //instantiating the class
             filing.selectFilingInfo(getFurnitureType()); //creating the combinations
-            if(!filing.getIsEmpty()) { //if combinations were created successfully
+            update = new UpdateDatabase(getDburl(), getUsername(), getPassword());
+            orderN = new OrderNotFulfilled(getDburl(), getUsername(), getPassword());
+            if(!filing.getIsEmpty()) {
                 text.writeOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), filing.getSmallest(), filing.getIdCombo()); //write to order fulfilled text file
                 update.deleteFromDataBase(filing.getIdCombo(), getFurnitureCategory());
+                update.close(); //closing the connection
             }
-            else if (filing.getIsEmpty()){//if combinations not created
+            else if (filing.getIsEmpty()){
                 text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findFilingManu()); //write to order not fulfilled and find the furniture manufacturer
+                orderN.close(); //closing the connection
             }
-            filing.close();
-            update.close();
+            filing.close(); //closing the connection
         }
 //
         else if(checkLampInput(getFurnitureCategory(), getFurnitureType())){
-            lamp = new Lamp (getNumberItems()); //instantiating the class
-            lamp.selectLampInfo(getFurnitureType()); //creating the combinations
-            if(!lamp.getIsEmpty()) {  //if orders can be made, write to text file and
+            lamp = new Lamp (getNumberItems(), getDburl(), getUsername(), getPassword()); //instantiating the class
+            lamp.selectLampInfo(getFurnitureType());
+            update = new UpdateDatabase(getDburl(), getUsername(), getPassword());
+            orderN = new OrderNotFulfilled(getDburl(), getUsername(), getPassword());//creating the combinations
+            if(!lamp.getIsEmpty()) {
                 text.writeOrderFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), lamp.getSmallest(), lamp.getIdCombo()); //write to order fulfilled text file
                 update.deleteFromDataBase(lamp.getIdCombo(), getFurnitureCategory());
+                update.close();
             }
-            else if (lamp.getIsEmpty()){//if combinations not created
+            else if (lamp.getIsEmpty()){
                 text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findLampManu()); //write to order not fulfilled and find the furniture manufacturer
+                orderN.close();
+
             }
-            lamp.close();
-            update.close();
+            lamp.close(); //closing the connection
         }
 
         else {
@@ -225,4 +248,27 @@ public class OrderUserInterface {
         this.furnitureType = furnitureType;
     }
 
+    /**
+     * getter function for database url
+     * @return
+     */
+
+    public String getDburl() {
+        return DBURL;
+    }
+
+    /**
+     * getter function for database username
+     * @return
+     */
+    public String getUsername() {
+        return USERNAME;
+    }
+    /**
+     * getter function for database password
+     * @return
+     */
+    public String getPassword() {
+        return PASSWORD;
+    }
 }
