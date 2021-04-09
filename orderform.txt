@@ -4,6 +4,11 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: mesh desk, 1
+Original Request: mesh Chair, 1
 
-Order cannot be fulfilled based on current inventory. Suggested manufacturers are: Office Furnishings, Fine Office Supplies, Academic Desks, Furniture Goods
+Items Ordered
+ID: C6748
+ID: C8138
+ID: C9890
+
+Total Price: $200

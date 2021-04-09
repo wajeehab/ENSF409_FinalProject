@@ -1,15 +1,41 @@
 package edu.ucalgary.ensf409;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
 public class UpdateDatabaseTest {
+    @Before
+    public void addDeletedValuesBack() {
+        InitializeConnection connection = new InitializeConnection();
+        connection.Initialize();
+        try {
+            String query = "INSERT INTO DESK (ID, Type, Legs, Top, Drawer, Price, ManuID) VALUES (?,?,?,?,?,?,?)";
+            PreparedStatement myStmt = connection.getDbConnect().prepareStatement(query);
+            myStmt.setString(1, "D1920");
+            myStmt.setString(2, "Standing");
+            myStmt.setString(3, "Y");
+            myStmt.setString(4, "Y");
+            myStmt.setString(5, "N");
+            myStmt.setInt(6, 100);
+            myStmt.setString(7, "005");
+
+            int rowCount = myStmt.executeUpdate();
+            System.out.println("Rows affected: " + rowCount);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 
     @Test
     public void deleteFromDataBaseTest() {
@@ -19,14 +45,13 @@ public class UpdateDatabaseTest {
         ArrayList<String> expected = new ArrayList<>();
         ArrayList<String> result = new ArrayList<>();
 
-
-        idCombo.add("D1927");
-        idCombo.add("D2341");
-        idCombo.add("D3820");
+        idCombo.add("D1920");
 
         expected.add("D9387");
         expected.add("D4438");
-
+        expected.add("D3820");
+        expected.add("D2341");
+        expected.add("D1927");
 
         update.deleteFromDataBase(idCombo, "Desk");
 
@@ -42,6 +67,9 @@ public class UpdateDatabaseTest {
             throwables.printStackTrace();
         }
 
-        assertEquals("Items not properly deleted", expected, result);
+        Collections.sort(expected);
+        Collections.sort(result);
+
+        assertEquals("Item not properly deleted", expected, result);
     }
 }
