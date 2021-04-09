@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import static org.junit.Assert.assertEquals;
 import java.io.*;
@@ -39,7 +39,7 @@ public class TextFileTest {
         stringList.add("C1320");
         stringList.add("C3405");
         TextFile newTextFile = new TextFile();
-        newTextFile.WriteOrderFulfilled("Cushion", "Chair", 2, 3, stringList);
+        newTextFile.writeOrderFulfilled("Cushion", "Chair", 2, 3, stringList);
 
         textFileFulfilled();
 
@@ -60,7 +60,7 @@ public class TextFileTest {
     public void WriteNotFulfilledTest() {
 
         TextFile newTextFile = new TextFile();
-        newTextFile.WriteNotFulfilled("Cushion", "Chair", 5, "Chairs R Us");
+        newTextFile.writeNotFulfilled("Cushion", "Chair", 5, "Chairs R Us");
 
         textFileNotFulfilled();
 

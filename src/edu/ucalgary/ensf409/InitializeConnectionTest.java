@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -7,7 +7,7 @@ import java.sql.*;
 public class InitializeConnectionTest {
     
     @Test
-    public void InitializeTest() throws SQLException{
+    public void InitializeTest() {
         
         InitializeConnection newInitializeConnection = new InitializeConnection();
         newInitializeConnection.Initialize();
@@ -27,12 +27,20 @@ public class InitializeConnectionTest {
         catch(SQLException e) {
             e.printStackTrace();
         }
-
-        //boolean connect = newConnect.isValid(30);
-        //boolean expected = false;
         String[] expected = {"D1927", "D2341", "D3820", "D4438", "D9387"};
 
-        assertEquals("", expected, results2);
+        assertEquals("Connection was not established and correct ID's not retrieved", expected, results2);
+    }
+    @Test
+    public void TestClose() throws SQLException {
+        Chair newChair = new Chair(1);
+        newChair.selectChairInfo("mesh");
+        Connection newConnect = newChair.getDbConnect();
+        newChair.close();
+        boolean connect = newConnect.isClosed();
+        boolean expected = true;
+
+        assertEquals("Connection was not closed succesfully", expected, connect);
     }
 
 }

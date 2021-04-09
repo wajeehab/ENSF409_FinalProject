@@ -317,5 +317,14 @@ public class Desk {
         public void setSmallest(int p){
             this.smallest += p;
         }
+
+    public void close() {
+        try {
+            results.close();
+            dbConnect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

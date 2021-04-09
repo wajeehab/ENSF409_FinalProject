@@ -17,6 +17,11 @@ public class Chair {
     private ArrayList<ArrayList<String>> combinations = new ArrayList<>();
     private ArrayList<ArrayList<String>> price = new ArrayList<>();
     private ResultSet results;
+
+    public Connection getDbConnect() {
+        return dbConnect;
+    }
+
     private Connection dbConnect;
     private int smallest;
     private boolean isEmpty;
@@ -331,4 +336,12 @@ public class Chair {
         this.smallest += p;
     }
 
+    public void close() {
+        try {
+            results.close();
+            dbConnect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

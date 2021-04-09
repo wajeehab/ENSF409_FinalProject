@@ -14,7 +14,7 @@ public class InitializeConnection { //******************** CHANGE DBCONNECT*****
      */
     public void Initialize() {
         try{
-            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/inventory","Sam","ensf409");
+            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/inventory","scm","ensf409");
         } catch (SQLException e) {
             System.out.println("DID NOT CONNECT TO SQL DATABASE");
             e.printStackTrace();
@@ -28,4 +28,5 @@ public class InitializeConnection { //******************** CHANGE DBCONNECT*****
     public Connection getDbConnect() {
         return dbConnect;
     }
+
 }

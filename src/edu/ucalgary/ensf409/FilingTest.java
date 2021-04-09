@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import static org.junit.Assert.assertEquals;
 import java.io.*;
@@ -143,7 +143,6 @@ public class FilingTest {
 
         Filing newFiling = new Filing(2);
         newFiling.selectFilingInfo("Medium");
-        //newFiling.orderCombos(2);
 
         int result = newFiling.getSmallest();
         int expected = 400;

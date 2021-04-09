@@ -218,4 +218,13 @@ public class Lamp {
         return combinations;
     }
 
+    public void close() {
+        try {
+            results.close();
+            dbConnect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

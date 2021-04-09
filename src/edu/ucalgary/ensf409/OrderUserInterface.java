@@ -7,6 +7,8 @@ import java.util.Scanner;
  * based on the user's input
  */
 public class OrderUserInterface {
+
+
     private String furnitureCategory;
     private String furnitureType;
     private int numberItems;
@@ -18,11 +20,20 @@ public class OrderUserInterface {
     private UpdateDatabase update = new UpdateDatabase();
     private OrderNotFulfilled orderN = new OrderNotFulfilled();
 
+
     /**
-     * This constructor prompts the user for furniture category, type and number of items
+     * empty constructor
+     */
+
+    public OrderUserInterface(){ }
+
+
+
+    /**
+     * This function prompts the user for furniture category, type and number of items
      * which they want constructed and stores the input.
      */
-    public OrderUserInterface(){
+    public void startProgram(){
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Enter furniture category:  ");
         this.furnitureCategory = reader.nextLine(); //Scans the next token of the input as a String
@@ -31,7 +42,8 @@ public class OrderUserInterface {
         this.furnitureType = reader.nextLine();
 
         System.out.println("Enter number of items:  ");
-        this.numberItems = reader.nextInt(); //Scans the next token of the input as an int
+        setNumberItems(reader.nextInt()); //Scans the next token of the input as an int
+
 
         reader.close();
     }
@@ -41,7 +53,7 @@ public class OrderUserInterface {
      * depending on the furniture category which the user enters
      */
     public void selectFurnitureCategory(){
-        if (getFurnitureCategory().equals("chair") | (getFurnitureCategory().equals("Chair"))) { //if user input matches
+        if (checkChairInput(getFurnitureCategory())) { //if user input matches
             chair = new Chair(getNumberItems()); //instantiating the class
             chair.selectChairInfo(getFurnitureType()); //creating the combinations
             if(!chair.getIsEmpty()) { //if combinations were created successfully
@@ -51,10 +63,10 @@ public class OrderUserInterface {
             else if (chair.getIsEmpty()){ //if combinations not created
                 text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findChairManu()); //write to order not fulfilled and find the furniture manufacturers
             }
-
+            chair.close();
         }
 
-        else if(getFurnitureCategory().equals("desk") | (getFurnitureCategory().equals("Desk"))){
+        else if (checkDeskInput(getFurnitureCategory())){
              desk = new Desk(getNumberItems()); //instantiating the class
              desk.selectDeskInfo(getFurnitureType()); //creating the combinations
             if(!desk.getIsEmpty()) { //if combinations were created successfully
@@ -64,9 +76,12 @@ public class OrderUserInterface {
             else if (desk.getIsEmpty()){ //if combinations not created
                 text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findDeskManu()); //write to order not fulfilled and find the furniture manufacturer
             }
+
+            desk.close();
+            update.close();
         }
 //
-        else if(getFurnitureCategory().equals("Filing") | (getFurnitureCategory().equals("filing"))){
+        else if(checkFilingInput(getFurnitureCategory())){
             filing = new Filing(getNumberItems()); //instantiating the class
             filing.selectFilingInfo(getFurnitureType()); //creating the combinations
             if(!filing.getIsEmpty()) { //if combinations were created successfully
@@ -75,9 +90,12 @@ public class OrderUserInterface {
             }
             else if (filing.getIsEmpty()){//if combinations not created
                 text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findFilingManu()); //write to order not fulfilled and find the furniture manufacturer
-            }        }
+            }
+            filing.close();
+            update.close();
+        }
 //
-        else if(getFurnitureCategory().equals("lamp") | (getFurnitureCategory().equals("Lamp"))){
+        else if(checkLampInput(getFurnitureCategory())){
             lamp = new Lamp (getNumberItems()); //instantiating the class
             lamp.selectLampInfo(getFurnitureType()); //creating the combinations
             if(!lamp.getIsEmpty()) {  //if orders can be made, write to text file and
@@ -87,10 +105,69 @@ public class OrderUserInterface {
             else if (lamp.getIsEmpty()){//if combinations not created
                 text.writeNotFulfilled(getFurnitureType(), getFurnitureCategory(), getNumberItems(), orderN.findLampManu()); //write to order not fulfilled and find the furniture manufacturer
             }
+            lamp.close();
+            update.close();
+        }
 
+        else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    /**
+     * this method checks to ensure the user input was valid
+     * @param input - user input
+     * @return true or throws illegal exaception
+     */
+    public boolean checkChairInput(String input){
+        if (input.equals("chair") | (input.equals("Chair"))){
+            return true;
         }
         else {
-            throw new IllegalArgumentException("Order Input Invalid"); //if the input is not valid then throw an illegal argument exception
+            return false;
+        }
+    }
+
+    /**
+     * this method checks to ensure the user input was valid
+     * @param categoryInput - user input
+     * @return true or throws illegal exaception
+     */
+    public boolean checkDeskInput(String categoryInput){
+        if (categoryInput.equals("desk") | (categoryInput.equals("Desk"))){
+            return true;
+        }
+
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * this method checks to ensure the user input was valid
+     * @param input - user input
+     * @return true or throws illegal exaception
+     */
+    public boolean checkFilingInput(String input){
+        if (input.equals("Filing") | (input.equals("filing"))){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * this method checks to ensure the user input was valid
+     * @param input - user input
+     * @return true or throws illegal exaception
+     */
+    public boolean checkLampInput(String input){
+        if (input.equals("lamp") | (input.equals("Lamp"))){
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -116,6 +193,23 @@ public class OrderUserInterface {
      */
     public int getNumberItems() {
         return numberItems;
+    }
+
+    public void setNumberItems(int numberItems) {
+        if(numberItems<=0){
+            throw new IllegalArgumentException("Cannot have 0 or less order");
+        }
+else {
+            this.numberItems = numberItems;
+        }
+    }
+
+    public void setFurnitureCategory(String furnitureCategory) {
+        this.furnitureCategory = furnitureCategory;
+    }
+
+    public void setFurnitureType(String furnitureType) {
+        this.furnitureType = furnitureType;
     }
 
 }
