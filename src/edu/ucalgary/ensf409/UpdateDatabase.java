@@ -45,11 +45,17 @@ public class UpdateDatabase {
 
     }
 
+    /**
+     * getter method for the connection
+     * @return dbConnect - the connection
+     */
     public Connection getDbConnect() {
         return dbConnect;
     }
 
-
+    /**
+     * This method closes all database connections
+     */
     public void close() {
         try {
             dbConnect.close();

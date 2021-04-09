@@ -7,6 +7,10 @@ import java.sql.*;
  */
 public class InitializeConnection { //******************** CHANGE DBCONNECT******************* */
     private Connection dbConnect;
+
+    /**
+     * empty constructor
+     */
     public InitializeConnection(){}
 
     /**
@@ -14,7 +18,7 @@ public class InitializeConnection { //******************** CHANGE DBCONNECT*****
      */
     public void Initialize() {
         try{
-            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/inventory","scm","ensf409");
+            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/inventory","scm","ensf409"); //predefined information for the database as per project specifications
         } catch (SQLException e) {
             System.out.println("DID NOT CONNECT TO SQL DATABASE");
             e.printStackTrace();

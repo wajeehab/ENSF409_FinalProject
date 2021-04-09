@@ -122,4 +122,16 @@ public class OrderNotFulfilled {
         }
         return str.toString();
     }
+
+    /**
+     * this methods closes all database connections
+     */
+    public void close() {
+        try {
+            results.close();
+            dbConnect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

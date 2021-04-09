@@ -218,6 +218,9 @@ public class Lamp {
         return combinations;
     }
 
+    /**
+     * This method closes all database connections
+     */
     public void close() {
         try {
             results.close();

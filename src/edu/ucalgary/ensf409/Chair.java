@@ -336,6 +336,9 @@ public class Chair {
         this.smallest += p;
     }
 
+    /**
+     * This methods closes all connections
+     */
     public void close() {
         try {
             results.close();

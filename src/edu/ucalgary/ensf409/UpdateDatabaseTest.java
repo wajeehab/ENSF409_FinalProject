@@ -12,7 +12,13 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This test ensures that the UpdateDatabase function is updating the database correctly
+ */
 public class UpdateDatabaseTest {
+    /**
+     * Before testing, a custom component is added to the database which will later be removed by the test
+     */
     @Before
     public void addDeletedValuesBack() {
         InitializeConnection connection = new InitializeConnection();
@@ -36,7 +42,11 @@ public class UpdateDatabaseTest {
         }
     }
 
-
+    /**
+     * This test removes the ID which was inserted in the before setup of the test and
+     * accesses the database to create an arraylist of which ID's should remain in the Desk
+     * database for the type 'Standing' after this ID is removed. 
+     */
     @Test
     public void deleteFromDataBaseTest() {
         UpdateDatabase update = new UpdateDatabase();

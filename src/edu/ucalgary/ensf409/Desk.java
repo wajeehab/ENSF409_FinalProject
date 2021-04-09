@@ -318,6 +318,9 @@ public class Desk {
             this.smallest += p;
         }
 
+    /**
+     * This method closes all database connections
+     */
     public void close() {
         try {
             results.close();
