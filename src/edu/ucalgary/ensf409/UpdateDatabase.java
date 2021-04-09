@@ -3,7 +3,7 @@ package edu.ucalgary.ensf409;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * This class updates the database after an order has been fulfilled
