@@ -32,7 +32,6 @@ public class InitializeConnectionTest {
         //boolean expected = false;
         String[] expected = {"D1927", "D2341", "D3820", "D4438", "D9387"};
 
-        assertEquals("", expected, results2);
+        assertEquals("Initialize does not connect properly.", expected, results2);
     }
-
 }
