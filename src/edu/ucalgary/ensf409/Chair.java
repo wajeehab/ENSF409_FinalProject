@@ -142,7 +142,6 @@ public class Chair {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-//        System.out.println(price);
     }
 
     /** This is a recursive method which finds the cheapest combination of parts for a given number of orders

@@ -45,7 +45,7 @@ public class UpdateDatabaseTest {
     /**
      * This test removes the ID which was inserted in the before setup of the test and
      * accesses the database to create an arraylist of which ID's should remain in the Desk
-     * database for the type 'Standing' after this ID is removed. 
+     * database for the type 'Standing' after this ID is removed.
      */
     @Test
     public void deleteFromDataBaseTest() {
