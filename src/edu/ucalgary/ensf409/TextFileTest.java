@@ -7,7 +7,8 @@ import java.util.*;
 import org.junit.*;
 
 /**
- * This class tests the functionality of the TextFile class.
+ * This class tests the functionality of the TextFile class. It ensures that all 
+ * major funtionality of the included methods is tested.
  */
 
 public class TextFileTest {

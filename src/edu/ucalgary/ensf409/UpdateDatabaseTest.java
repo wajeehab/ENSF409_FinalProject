@@ -9,11 +9,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import static org.junit.Assert.assertEquals;
 
 /**
- * This test ensures that the UpdateDatabase function is updating the database correctly
+ * This class tests the functionality of the UpdateDatabase class, specifically checking
+ * the database updating and deleting methods.
+ */
+
+/**
+ * This test ensures that the UpdateDatabase function is updating the database correctly by updating 
+ * database values, retrieving those values into a String, and comparing that string 
+ * with an expected String which we know is correct.
  */
 public class UpdateDatabaseTest {
     /**

@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import java.sql.*;
 
+/**
+ * This class tests the functionality of the InitializeConnection class. It does 
+ * this by ensuring that the connctions properly initialize and close.
+ */
+
 public class InitializeConnectionTest {
     
     @Test

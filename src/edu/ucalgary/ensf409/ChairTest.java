@@ -7,8 +7,18 @@ import java.util.*;
 import org.junit.*;
 import java.sql.*;
 
+/**
+ * This class tests the functionality of the Chair class. It does this by creating test 
+ * values and comparing those values to values affected by each method that is tested.
+ */
+
 public class ChairTest {
 
+    /**
+     * This method tests the functionality of the createCombinations method within
+     * the Chair class by comparing an expected ArrayList with the stored Combinations
+     * ArrayList within the class after running the method.
+     */
     @Test
     public void createCombinationsTest() {
         
@@ -29,6 +39,11 @@ public class ChairTest {
         assertEquals("createCombinations did not give the proper result.",expected, result);
     }
 
+    /**
+     * This method tests the functionality of the selectPrice method within
+     * the Chair class by comparing an expected ArrayList with the stored Price
+     * ArrayList within the class after running the method.
+     */
     @Test
     public void selectPriceTest() {
         
@@ -47,6 +62,11 @@ public class ChairTest {
         assertEquals("selectPrice did not set the proper values.",expected, result);
     }
 
+    /**
+     * This method tests the functionality of the orderCombos method within
+     * the Chair class by comparing an expected lowest-price int value with the stored 
+     * lowest-price int value within the class after running the method.
+     */
     @Test
     public void orderCombosTest() {
         Chair newChair = new Chair(2);
@@ -58,6 +78,11 @@ public class ChairTest {
         assertEquals("orderCombos does not give the proper value.", expected, result);
     }
 
+    /**
+     * This method tests the functionality of the findPriceAndCombo method within
+     * the Chair class by comparing an lowest-price int value with the stored lowest-
+     * price int value within the class after running the method.
+     */
     @Test
     public void findPriceAndComboTest() {
         Chair newChair = new Chair(1);
@@ -69,6 +94,11 @@ public class ChairTest {
         assertEquals("findPriceAndCombo does not give the proper price.", expected, result);
     }
 
+    /**
+     * This method tests the functionality of the addToOrder method within
+     * the Chair class by comparing a sorted expected ArrayList of Strings with the sorted
+     * stored resulting ArrayList to ensure they match.
+     */
     @Test
     public void addToOrderTest() {
 
@@ -96,6 +126,11 @@ public class ChairTest {
         assertEquals("addToOrder does not properly update the totalOrder ArrayList.", expected, result);
     }
 
+    /**
+     * This method tests the functionality of the getRidofDuplicates method within
+     * the Chair class by comparing an expected ArrayList with returned ArrayList
+     * provided after running the method. It ensures that duplicate IDs are removed. 
+     */
     @Test
     public void getRidofDuplicatesTest() {
         
@@ -130,11 +165,18 @@ public class ChairTest {
         assertEquals("getRidofDuplicates did not return the proper ArrayList.", expected, result);
     }
 
+    /**
+     * This method tests the functionality of the checkEmpty method within
+     * the Chair class by comparing an expected boolean value with the boolean
+     * returned by the method, ensuring that the hasArray is empty.
+     */
     @Test
     public void checkEmptyTest() {
 
         Chair newChair = new Chair(1);
-        newChair.selectChairInfo("mesh"); //after running through and creating an order, one of the hasArrays for chair should become empty
+        //After running through and creating an order, 
+        //one of the hasArrays for chair should become empty.
+        newChair.selectChairInfo("mesh"); 
         boolean x = newChair.checkEmpty();
 
         boolean expected = true;
@@ -142,6 +184,11 @@ public class ChairTest {
         assertEquals("checkEmpty did not check properly.", expected, x);
     }
 
+    /**
+     * This method tests the functionality of the createHasArrays method within
+     * the Chair class by comparing an expected ArrayList with returned ArrayList
+     * provided after running the method. It ensures that duplicate IDs are removed. 
+     */
     @Test
     public void createHasArraysTest() {
 
@@ -166,6 +213,12 @@ public class ChairTest {
         assertEquals("createHasArrays did not provide the expected hasArray ArrayList.", expectedHasArray, result);
     }
 
+    /**
+     * This method tests the fucntionality of the updateHasArray method within
+     * the Chair class by comparing an expected ArrayList with returned ArrayList
+     * provided after running the method with given test values. It ensures that 
+     * the hasArray is updated to the proper format needed for following methods.
+     */
     @Test
     public void updateHasArraysTest() {
 

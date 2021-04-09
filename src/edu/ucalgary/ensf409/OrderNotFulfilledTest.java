@@ -3,6 +3,11 @@ package edu.ucalgary.ensf409;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+/**
+ * This class tests the functionality of the OrderNotFulfilled class. It does this by creating test 
+ * values and comparing those values to values affected by each method that is tested.
+ */
+
 public class OrderNotFulfilledTest {
     
     @Test

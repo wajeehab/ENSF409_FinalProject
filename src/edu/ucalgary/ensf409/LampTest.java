@@ -7,8 +7,18 @@ import java.util.*;
 import org.junit.*;
 import java.sql.*;
 
+/**
+ * This class tests the functionality of the Lamp class. It does this by creating test 
+ * values and comparing those values to values affected by each method that is tested.
+ */
+
 public class LampTest {
 
+    /**
+     * This method tests the functionality of the createHasArrays method within
+     * the Lamp class by comparing an expected ArrayList with returned ArrayList
+     * provided after running the method. It ensures that duplicate IDs are removed. 
+     */
     @Test
     public void createHasArraysTest() {
         
@@ -43,6 +53,11 @@ public class LampTest {
 
     }
 
+    /**
+     * This method tests the functionality of the orderCombos method within
+     * the Lamp class by comparing an expected lowest-price int value with the stored 
+     * lowest-price int value within the class after running the method.
+     */
     @Test
     public void orderCombosTest() {
         
@@ -54,6 +69,11 @@ public class LampTest {
         assertEquals("findPriceAndCombo did not return the lowest price", expected, result);
     }
 
+    /**
+     * This method tests the functionality of the findPriceAndCombo method within
+     * the Lamp class by comparing an lowest-price int value with the stored lowest-
+     * price int value within the class after running the method.
+     */
     @Test
     public void findPriceAndComboTest() {
         
@@ -65,6 +85,12 @@ public class LampTest {
         assertEquals("findPriceAndCombo did not return the lowest price", expected, result);
     }
 
+    /**
+     * This method tests the fucntionality of the updateHasArray method within
+     * the Lamp class by comparing an expected ArrayList with returned ArrayList
+     * provided after running the method with given test values. It ensures that 
+     * the hasArray is updated to the proper format needed for following methods.
+     */
     @Test
     public void updateHasArraysTest() {
         
@@ -98,6 +124,11 @@ public class LampTest {
         assertEquals("UpdateHasArrays did not properly update the ArrayList.", expected, newHasArray);
     }
 
+    /**
+     * This method tests the functionality of the checkEmpty method within
+     * the Lamp class by comparing an expected boolean value with the boolean
+     * returned by the method, ensuring that the hasArray is empty.
+     */
     @Test
     public void checkEmptyTest() {
         
