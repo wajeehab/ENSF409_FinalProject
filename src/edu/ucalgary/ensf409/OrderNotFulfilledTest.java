@@ -10,6 +10,11 @@ import org.junit.Test;
 
 public class OrderNotFulfilledTest {
     
+    /**
+     * This method tests the functionality of the findChairManu method within
+     * the OrderNotFulfilled class by comparing an expected manufacturers with the 
+     * manufacturers returned by the method.
+     */
     @Test
     public void findChairManuTest() {
         
@@ -21,6 +26,11 @@ public class OrderNotFulfilledTest {
         assertEquals("findChairManu returns the proper String", expected, result);
     }
 
+    /**
+     * This method tests the functionality of the findLampManu method within
+     * the OrderNotFulfilled class by comparing an expected manufacturers with the 
+     * manufacturers returned by the method.
+     */
     @Test
     public void findLampManuTest() {
 
@@ -32,6 +42,11 @@ public class OrderNotFulfilledTest {
         assertEquals("findLampManu returns the proper String", expected, result);
     }
 
+    /**
+     * This method tests the functionality of the findFilingManu method within
+     * the OrderNotFulfilled class by comparing an expected manufacturers with the 
+     * manufacturers returned by the method.
+     */
     @Test
     public void findFilingManuTest() {
 
@@ -43,6 +58,11 @@ public class OrderNotFulfilledTest {
         assertEquals("findFilingManu returns the proper String", expected, result);
     }
 
+    /**
+     * This method tests the functionality of the findDeskManu method within
+     * the OrderNotFulfilled class by comparing an expected manufacturers with the 
+     * manufacturers returned by the method.
+     */
     @Test
     public void findDeskManuTest() {
 
