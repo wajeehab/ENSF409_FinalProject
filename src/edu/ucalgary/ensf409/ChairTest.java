@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import static org.junit.Assert.assertEquals;
 import java.io.*;
@@ -19,14 +19,13 @@ public class ChairTest {
 
         ArrayList<ArrayList<String>> expected = new ArrayList<>();
         expected.add(0, new ArrayList<>());
-        expected.add(1, new ArrayList<>());
-        expected.get(0).add(0, "C5784");
-        expected.get(0).add(1, "C2483");
-        expected.get(0).add(2, "C7268");
-        expected.get(1).add(0, "C2483");
-        expected.get(1).add(1, "C7268");
-        expected.get(1).add(2, "C5784");
+        expected.get(0).add(0, "C2483");
+        expected.get(0).add(1, "C7268");
+        expected.get(0).add(2, "C5784");
 
+        for(int i =0;i< expected.size();i++){
+            Collections.sort(expected.get(i));
+        }
         assertEquals("createCombinations did not give the proper result.",expected, result);
     }
 
@@ -38,25 +37,20 @@ public class ChairTest {
         ArrayList<ArrayList<String>> result = newChair.getPrice();
 
         ArrayList<ArrayList<String>> expected = new ArrayList<>();
+
         expected.add(0, new ArrayList<>());
-        expected.add(1, new ArrayList<>());
-        expected.get(0).add(0, "150");
-        expected.get(0).add(1, "175");
+        expected.get(0).add(0, "175");
+        expected.get(0).add(1, "150");
         expected.get(0).add(2, "75");
-        expected.get(1).add(0, "175");
-        expected.get(1).add(1, "75");
-        expected.get(1).add(2, "150");
+
 
         assertEquals("selectPrice did not set the proper values.",expected, result);
     }
 
     @Test
     public void orderCombosTest() {
-        
-
         Chair newChair = new Chair(2);
         newChair.selectChairInfo("Mesh");
-        //newChair.orderCombos(2);
 
         int result = newChair.getSmallest();
         int expected = 200;
@@ -77,18 +71,27 @@ public class ChairTest {
 
     @Test
     public void addToOrderTest() {
-        
+
+        //generating the correct from the program
         Chair newChair = new Chair(1);
         newChair.selectChairInfo("Mesh");
-        newChair.addToOrder();
         ArrayList<String> result = newChair.getIdCombo();
 
+//
+//        //hardcoding in the expected to make sure the addToOrder method works properly on its own
+        Chair expectedChair= new Chair(1);
+        String [] newComboId = {"C6748"};
+        expectedChair.setOrderCombo(newComboId);
+        ArrayList<String> newAddition = new ArrayList<>();
+        newAddition.add("C8138");
+        newAddition.add("C9890");
+        expectedChair.setTotalOrder(newAddition);
+        expectedChair.addToOrder();
 
-        ArrayList<String> expected = new ArrayList<>();
-        expected.add("C6748");
-        expected.add("C9890");
-        expected.add("C8138");
+        ArrayList<String> expected = expectedChair.getIdCombo();
 
+        Collections.sort(expected);
+        Collections.sort(result);
 
         assertEquals("addToOrder does not properly update the totalOrder ArrayList.", expected, result);
     }
@@ -131,9 +134,8 @@ public class ChairTest {
     public void checkEmptyTest() {
 
         Chair newChair = new Chair(1);
-        newChair.selectChairInfo("Mesh");
+        newChair.selectChairInfo("mesh"); //after running through and creating an order, one of the hasArrays for chair should become empty
         boolean x = newChair.checkEmpty();
-        
 
         boolean expected = true;
 
@@ -184,9 +186,5 @@ public class ChairTest {
 
         assertEquals("UpdateHasArrays did not properly update the ArrayList.", expected, newHasArray);
     }
-
-    //---------------------------------------------------------------------------------
-
-
 
 }

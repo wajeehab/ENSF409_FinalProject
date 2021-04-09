@@ -1,8 +1,6 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.*;
 
 /**
@@ -19,6 +17,11 @@ public class Chair {
     private ArrayList<ArrayList<String>> combinations = new ArrayList<>();
     private ArrayList<ArrayList<String>> price = new ArrayList<>();
     private ResultSet results;
+
+    public Connection getDbConnect() {
+        return dbConnect;
+    }
+
     private Connection dbConnect;
     private int smallest;
     private boolean isEmpty;
@@ -38,8 +41,6 @@ public class Chair {
         this.numberOfItems = numberItems; //initializes the number of items needed in that order
         this.smallest = 0; //initializing the smallest sum to zero
     }
-
-    //public Chair() {}
 
     /**
      * This function searches the Chair table in the inventory DATABASE
@@ -117,7 +118,6 @@ public class Chair {
             }
         }
         combinations = getRidofDuplicates(result); //getting rid of duplicate ID'S within each combination
-        Collections.sort(combinations);
         selectPrice(); //finding the prices of each combination
     }
 
@@ -140,7 +140,6 @@ public class Chair {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-//        System.out.println(price);
     }
 
     /** This is a recursive method which finds the cheapest combination of parts for a given number of orders
@@ -198,6 +197,8 @@ public class Chair {
         }
         return cost;  //returns the lowest price
     }
+
+
 
     /**
      * This method will add ID's to the total order, ignoring duplicates (IDs passed in during the previous recursion)
@@ -334,4 +335,31 @@ public class Chair {
         this.smallest += p;
     }
 
+    /**
+     * This method sets the OrderCombo and is primarily used for testing
+     * @param orderCombo
+     */
+    public void setOrderCombo(String[] orderCombo) {
+        this.orderCombo = orderCombo;
+    }
+
+    /**
+     * This method sets the totalOrder and is primarily used for testing
+     * @param totalOrder
+     */
+
+    public void setTotalOrder(ArrayList<String> totalOrder) {
+        this.totalOrder = totalOrder;
+    }
+    /**
+     * This methods closes all connections
+     */
+    public void close() {
+        try {
+            results.close();
+            dbConnect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

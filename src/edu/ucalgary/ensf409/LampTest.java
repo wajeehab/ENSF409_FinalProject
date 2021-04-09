@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import static org.junit.Assert.assertEquals;
 import java.io.*;
@@ -47,7 +47,6 @@ public class LampTest {
     public void orderCombosTest() {
         
         Lamp newLamp = new Lamp(2);
-        //newLamp.findPriceAndCombo();
         newLamp.selectLampInfo("desk");
         int result = newLamp.getSmallest();
         int expected = 40;
@@ -59,7 +58,6 @@ public class LampTest {
     public void findPriceAndComboTest() {
         
         Lamp newLamp = new Lamp(1);
-        //newLamp.findPriceAndCombo();
         newLamp.selectLampInfo("desk");
         int result = newLamp.getSmallest();
         int expected = 20;

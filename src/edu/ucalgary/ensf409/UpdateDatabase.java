@@ -1,9 +1,9 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class updates the database after an order has been fulfilled
@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class UpdateDatabase {
     private final InitializeConnection DATABASE = new InitializeConnection();
+
+
     private Connection dbConnect;
 
     /**
@@ -39,6 +41,26 @@ public class UpdateDatabase {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+
+    }
+
+    /**
+     * getter method for the connection
+     * @return dbConnect - the connection
+     */
+    public Connection getDbConnect() {
+        return dbConnect;
+    }
+
+    /**
+     * This method closes all database connections
+     */
+    public void close() {
+        try {
+            dbConnect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

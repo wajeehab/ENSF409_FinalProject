@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -216,6 +216,18 @@ public class Lamp {
      */
     public ArrayList<String> getIdCombo() {
         return combinations;
+    }
+
+    /**
+     * This method closes all database connections
+     */
+    public void close() {
+        try {
+            results.close();
+            dbConnect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

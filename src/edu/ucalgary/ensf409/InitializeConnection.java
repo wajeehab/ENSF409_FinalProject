@@ -1,4 +1,4 @@
-//package edu.ucalgary.ensf409;
+package edu.ucalgary.ensf409;
 
 import java.sql.*;
 
@@ -7,6 +7,10 @@ import java.sql.*;
  */
 public class InitializeConnection { //******************** CHANGE DBCONNECT******************* */
     private Connection dbConnect;
+
+    /**
+     * empty constructor
+     */
     public InitializeConnection(){}
 
     /**
@@ -14,7 +18,7 @@ public class InitializeConnection { //******************** CHANGE DBCONNECT*****
      */
     public void Initialize() {
         try{
-            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/inventory","Sam","ensf409");
+            dbConnect = DriverManager.getConnection("jdbc:mysql://localhost/inventory","scm","ensf409"); //predefined information for the database as per project specifications
         } catch (SQLException e) {
             System.out.println("DID NOT CONNECT TO SQL DATABASE");
             e.printStackTrace();
@@ -28,4 +32,5 @@ public class InitializeConnection { //******************** CHANGE DBCONNECT*****
     public Connection getDbConnect() {
         return dbConnect;
     }
+
 }
