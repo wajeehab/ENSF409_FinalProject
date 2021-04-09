@@ -183,6 +183,7 @@ public class Filing {
 
     }
 
+
     /**
      * This method will add ID's to the total order, ignoring duplicates (IDs passed in during the previous recursion)
      */
@@ -269,6 +270,23 @@ public class Filing {
             }
         }
     }
+
+    /**
+     * setter method for orderCombo which is primarily used for testing purposes
+     * @param orderCombo
+     */
+    public void setOrderCombo(String[] orderCombo) {
+        this.orderCombo = orderCombo;
+    }
+
+    /**
+     * setter method for totalOrder which is primarily used for testing purposes
+     * @param totalOrder
+     */
+    public void setTotalOrder(ArrayList<String> totalOrder) {
+        this.totalOrder = totalOrder;
+    }
+
 
     /**
      * getter method for isEmpty, which indicates if any of the hasArrays are empty

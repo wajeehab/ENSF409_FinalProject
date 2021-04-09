@@ -71,20 +71,28 @@ public class ChairTest {
 
     @Test
     public void addToOrderTest() {
-        
+
+        //generating the correct from the program
         Chair newChair = new Chair(1);
         newChair.selectChairInfo("Mesh");
-        newChair.addToOrder();
         ArrayList<String> result = newChair.getIdCombo();
 
+//
+//        //hardcoding in the expected to make sure the addToOrder method works properly on its own
+        Chair expectedChair= new Chair(1);
+        String [] newComboId = {"C6748"};
+        expectedChair.setOrderCombo(newComboId);
+        ArrayList<String> newAddition = new ArrayList<>();
+        newAddition.add("C8138");
+        newAddition.add("C9890");
+        expectedChair.setTotalOrder(newAddition);
+        expectedChair.addToOrder();
 
-        ArrayList<String> expected = new ArrayList<>();
-        expected.add("C6748");
-        expected.add("C9890");
-        expected.add("C8138");
+        ArrayList<String> expected = expectedChair.getIdCombo();
 
         Collections.sort(expected);
         Collections.sort(result);
+
         assertEquals("addToOrder does not properly update the totalOrder ArrayList.", expected, result);
     }
 
@@ -126,7 +134,7 @@ public class ChairTest {
     public void checkEmptyTest() {
 
         Chair newChair = new Chair(1);
-        newChair.selectChairInfo("mesh");
+        newChair.selectChairInfo("mesh"); //after running through and creating an order, one of the hasArrays for chair should become empty
         boolean x = newChair.checkEmpty();
 
         boolean expected = true;

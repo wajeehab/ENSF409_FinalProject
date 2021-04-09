@@ -185,6 +185,22 @@ public class Desk {
     }
 
     /**
+     * Setter for OrdoCombo which is primarily used only for testing
+     * @param orderCombo
+     */
+    public void setOrderCombo(String[] orderCombo) {
+        this.orderCombo = orderCombo;
+    }
+
+    /**
+     * Setter for totalOrder which is primarily used only for testing
+     * @param totalOrder
+     */
+    public void setTotalOrder(ArrayList<String> totalOrder) {
+        this.totalOrder = totalOrder;
+    }
+
+    /**
      * This method will add ID's to the total order, ignoring duplicates (IDs passed in during the previous recursion)
      */
     public void addToOrder(){

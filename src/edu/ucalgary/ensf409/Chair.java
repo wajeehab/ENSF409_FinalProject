@@ -42,8 +42,6 @@ public class Chair {
         this.smallest = 0; //initializing the smallest sum to zero
     }
 
-    //public Chair() {}
-
     /**
      * This function searches the Chair table in the inventory DATABASE
      * and creates table which stores the ID and inventory of the items
@@ -200,6 +198,8 @@ public class Chair {
         return cost;  //returns the lowest price
     }
 
+
+
     /**
      * This method will add ID's to the total order, ignoring duplicates (IDs passed in during the previous recursion)
      */
@@ -335,6 +335,22 @@ public class Chair {
         this.smallest += p;
     }
 
+    /**
+     * This method sets the OrderCombo and is primarily used for testing
+     * @param orderCombo
+     */
+    public void setOrderCombo(String[] orderCombo) {
+        this.orderCombo = orderCombo;
+    }
+
+    /**
+     * This method sets the totalOrder and is primarily used for testing
+     * @param totalOrder
+     */
+
+    public void setTotalOrder(ArrayList<String> totalOrder) {
+        this.totalOrder = totalOrder;
+    }
     /**
      * This methods closes all connections
      */

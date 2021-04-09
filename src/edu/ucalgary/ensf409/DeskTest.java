@@ -55,6 +55,9 @@ public class DeskTest {
         expected.get(7).add(1, "D4231");
         expected.get(7).add(2, "D8675");
 
+        for (int i =0; i<expected.size();i++){
+            Collections.sort(expected.get(i));
+        }
 
         assertEquals("createCombinations did not give the proper result.",expected, result);
     }
@@ -104,16 +107,18 @@ public class DeskTest {
         expected.get(7).add(1, "50");
         expected.get(7).add(2, "75");
 
+        for (int i =0; i<expected.size();i++){
+            Collections.sort(expected.get(i));
+        }
+
         assertEquals("selectPrice did not set the proper values.",expected, result);
     }
 
     @Test
     public void orderCombosTest() {
-        
 
         Desk newDesk = new Desk(2);
         newDesk.selectDeskInfo("Standing");
-        //newDesk.orderCombos(2);
 
         int result = newDesk.getSmallest();
         int expected = 600;
@@ -134,16 +139,25 @@ public class DeskTest {
 
     @Test
     public void addToOrderTest() {
-        
+
+        //generating the correct from the program
         Desk newDesk = new Desk(1);
-        newDesk.selectDeskInfo("Standing");
-        newDesk.addToOrder();
+        newDesk.selectDeskInfo("standing");
         ArrayList<String> result = newDesk.getIdCombo();
 
-        ArrayList<String> expected = new ArrayList<>();
-        expected.add("D3820");
-        expected.add("D4438");
+        //hardcoding in the expected to make sure the addToOrder method works properly on its own
+        Desk expectedDesk = new Desk(1);
+        String [] newComboId = {"D3820"};
+        expectedDesk.setOrderCombo(newComboId);
+        ArrayList<String> newAddition = new ArrayList<>();
+        newAddition.add("D4438");
+        expectedDesk.setTotalOrder(newAddition);
+        expectedDesk.addToOrder();
 
+        ArrayList<String> expected = expectedDesk.getIdCombo();
+
+        Collections.sort(expected);
+        Collections.sort(result);
 
         assertEquals("addToOrder does not properly update the totalOrder ArrayList.", expected, result);
     }

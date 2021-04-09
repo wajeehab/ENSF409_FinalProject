@@ -163,14 +163,25 @@ public class FilingTest {
 
     @Test
     public void addToOrderTest() {
-        
-        Filing newFiling = new Filing(1);
-        newFiling.selectFilingInfo("Medium");
-        newFiling.addToOrder();
+        //generating the correct from the program
+        Filing newFiling = new Filing(2);
+        newFiling.selectFilingInfo("medium");
         ArrayList<String> result = newFiling.getIdCombo();
 
-        ArrayList<String> expected = new ArrayList<>();
-        expected.add("F014");
+        //hardcoding in the expected to make sure the addToOrder method works properly on its own
+        Filing expectedFiling= new Filing(2);
+        String [] newComboId = {"F014"};
+        expectedFiling.setOrderCombo(newComboId);
+        ArrayList<String> newAddition = new ArrayList<>();
+        newAddition.add("F002");
+        newAddition.add("F009");
+        expectedFiling.setTotalOrder(newAddition);
+        expectedFiling.addToOrder();
+
+        ArrayList<String> expected = expectedFiling.getIdCombo();
+
+        Collections.sort(expected);
+        Collections.sort(result);
 
         assertEquals("addToOrder does not properly update the totalOrder ArrayList.", expected, result);
     }

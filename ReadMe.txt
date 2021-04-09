@@ -12,4 +12,6 @@ If the order was not fulfilled, the manufacturer data will also be printed to or
 The orderform.txt is overwritten each time.
 
 
-For our JUNIT tests, it requires the use of the original database which was uploaded to D2L.
+For our JUNIT tests, it requires the use of the original database which was uploaded to D2L. Please ensure that no
+values from the database have been added or deleted before running tests. Where specfied, the tests will add their 
+own values into the database before running tests specifically just for testing purposes. 
