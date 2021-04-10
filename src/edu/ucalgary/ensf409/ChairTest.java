@@ -173,15 +173,10 @@ public class ChairTest {
     @Test
     public void checkEmptyTest() {
 
-<<<<<<< Updated upstream
-        Chair newChair = new Chair(1);
+        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
         //After running through and creating an order, 
         //one of the hasArrays for chair should become empty.
         newChair.selectChairInfo("mesh"); 
-=======
-        Chair newChair = new Chair(1,"jdbc:mysql://localhost/inventory", "scm", "ensf409");
-        newChair.selectChairInfo("mesh"); //after running through and creating an order, one of the hasArrays for chair should become empty
->>>>>>> Stashed changes
         boolean x = newChair.checkEmpty();
 
         boolean expected = true;

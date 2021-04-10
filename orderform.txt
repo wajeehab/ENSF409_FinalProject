@@ -4,10 +4,11 @@ Faculty Name:
 Contact:
 Date
 
-Original Request: swing arm lamp, 1
+Original Request: desk lamp, 2
 
 Items Ordered
-ID: L879
-ID: L487
+ID: L564
+ID: L342
+ID: L649
 
-Total Price: $30
+Total Price: $40

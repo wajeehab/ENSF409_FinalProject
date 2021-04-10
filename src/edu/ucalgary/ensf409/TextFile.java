@@ -47,7 +47,10 @@ public class TextFile {
             myWriter.write("Total Price: " + "$" + price);
 
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            for (int i =0;i<idCombo.size();i++) {
+                System.out.print("ID: " + idCombo.get(i) + '\n');
+            }
+           System.out.println("Total Price: " + "$" + price);
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -80,7 +83,7 @@ public class TextFile {
             myWriter.write("\n");
             myWriter.write("Order cannot be fulfilled based on current inventory. Suggested manufacturers are: " + manuNames);
             myWriter.close();
-            System.out.println("Successfully wrote to Order Not Fulfilled file.");
+            System.out.println("Order could not be fulfilled. Suggested Manufacturers are " + manuNames);
         } catch (IOException e) {
             e.printStackTrace();
         }
