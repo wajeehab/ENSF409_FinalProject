@@ -1,8 +1,6 @@
 package edu.ucalgary.ensf409;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 /**
@@ -11,15 +9,13 @@ import java.util.*;
  */
 public class UpdateDatabase {
     private final InitializeConnection DATABASE = new InitializeConnection();
-
-
     private Connection dbConnect;
 
     /**
      * Constructor method which initializes the connection to the database
      */
     public UpdateDatabase(String user, String url, String password){
-        DATABASE.Initialize(user, url, password);
+        DATABASE.initialize(user, url, password);
         dbConnect = DATABASE.getDbConnect();
     }
 

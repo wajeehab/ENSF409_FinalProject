@@ -1,11 +1,7 @@
 package edu.ucalgary.ensf409;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.StringJoiner;
+import java.sql.*;
+import java.util.*;
 
 public class OrderNotFulfilled {
     private final InitializeConnection DATABASE = new InitializeConnection();
@@ -21,7 +17,7 @@ public class OrderNotFulfilled {
      * initializes the Id arrays with their respective manufacturer ID's
      */
     public OrderNotFulfilled(String user, String url, String password) {
-        DATABASE.Initialize(user, url, password);
+        DATABASE.initialize(user, url, password);
         dbConnect = DATABASE.getDbConnect();
 
         chairId.add("002");

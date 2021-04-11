@@ -1,15 +1,12 @@
 package edu.ucalgary.ensf409;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
 
 public class Filing {
     private final InitializeConnection DATABASE = new InitializeConnection();
     private ArrayList<String> hasRails;
-    private ArrayList<String>hasCabinets;
+    private ArrayList<String> hasCabinets;
     private ArrayList<String> hasDrawers;
     private ArrayList<ArrayList<String>> combinations = new ArrayList<>();
     private ArrayList<ArrayList<String>> price = new ArrayList<>();
@@ -28,7 +25,7 @@ public class Filing {
      * @param numberItems - the  number of items required in the order
      */
     public Filing(int numberItems, String url, String user, String password) {
-        DATABASE.Initialize(url, user, password);
+        DATABASE.initialize(url, user, password);
         dbConnect = DATABASE.getDbConnect();
         this.numberOfItems = numberItems; //initializes the number of items needed in that order
         this.smallest =0; //initializing the smallest sum to zero
@@ -272,23 +269,6 @@ public class Filing {
     }
 
     /**
-     * setter method for orderCombo which is primarily used for testing purposes
-     * @param orderCombo
-     */
-    public void setOrderCombo(String[] orderCombo) {
-        this.orderCombo = orderCombo;
-    }
-
-    /**
-     * setter method for totalOrder which is primarily used for testing purposes
-     * @param totalOrder
-     */
-    public void setTotalOrder(ArrayList<String> totalOrder) {
-        this.totalOrder = totalOrder;
-    }
-
-
-    /**
      * getter method for isEmpty, which indicates if any of the hasArrays are empty
      * and no more combinations can be made
      * @return
@@ -336,6 +316,22 @@ public class Filing {
      */
     public void setSmallest(int p){
         this.smallest += p;
+    }
+
+    /**
+     * setter method for orderCombo which is primarily used for testing purposes
+     * @param orderCombo
+     */
+    public void setOrderCombo(String[] orderCombo) {
+        this.orderCombo = orderCombo;
+    }
+
+    /**
+     * setter method for totalOrder which is primarily used for testing purposes
+     * @param totalOrder
+     */
+    public void setTotalOrder(ArrayList<String> totalOrder) {
+        this.totalOrder = totalOrder;
     }
 
     /**

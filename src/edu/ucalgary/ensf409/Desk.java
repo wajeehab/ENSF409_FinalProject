@@ -1,9 +1,6 @@
 package edu.ucalgary.ensf409;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
 /**
  * This class gathers information from the Desk DATABASE and finds
@@ -13,7 +10,7 @@ import java.util.*;
 public class Desk {
         private final InitializeConnection DATABASE = new InitializeConnection();
         private ArrayList<String> hasLegs;
-        private ArrayList<String>hasTop;
+        private ArrayList<String> hasTop;
         private ArrayList<String> hasDrawer;
         private ArrayList<ArrayList<String>> combinations = new ArrayList<>();
         private ArrayList<ArrayList<String>> price = new ArrayList<>();
@@ -31,7 +28,7 @@ public class Desk {
      * @param numberItems - the  number of items required in the order
      */
         public Desk(int numberItems, String url, String user, String password) {
-            DATABASE.Initialize(url, user, password);
+            DATABASE.initialize(url, user, password);
             dbConnect = DATABASE.getDbConnect();
             this.numberOfItems = numberItems; //initializes the number of items needed in that order
             this.smallest =0; //initializing the smallest sum to zero
@@ -185,22 +182,6 @@ public class Desk {
     }
 
     /**
-     * Setter for OrdoCombo which is primarily used only for testing
-     * @param orderCombo
-     */
-    public void setOrderCombo(String[] orderCombo) {
-        this.orderCombo = orderCombo;
-    }
-
-    /**
-     * Setter for totalOrder which is primarily used only for testing
-     * @param totalOrder
-     */
-    public void setTotalOrder(ArrayList<String> totalOrder) {
-        this.totalOrder = totalOrder;
-    }
-
-    /**
      * This method will add ID's to the total order, ignoring duplicates (IDs passed in during the previous recursion)
      */
     public void addToOrder(){
@@ -333,6 +314,22 @@ public class Desk {
         public void setSmallest(int p){
             this.smallest += p;
         }
+
+    /**
+     * Setter for OrdoCombo which is primarily used only for testing
+     * @param orderCombo
+     */
+    public void setOrderCombo(String[] orderCombo) {
+        this.orderCombo = orderCombo;
+    }
+
+    /**
+     * Setter for totalOrder which is primarily used only for testing
+     * @param totalOrder
+     */
+    public void setTotalOrder(ArrayList<String> totalOrder) {
+        this.totalOrder = totalOrder;
+    }
 
     /**
      * This method closes all database connections

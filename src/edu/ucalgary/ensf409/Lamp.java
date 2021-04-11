@@ -1,9 +1,6 @@
 package edu.ucalgary.ensf409;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
 
 
@@ -25,7 +22,7 @@ public class Lamp {
      * @param numberItems - the  number of items required in the order
      */
     public Lamp (int numberItems, String user, String url, String password) {
-        DATABASE.Initialize(user, url, password);
+        DATABASE.initialize(user, url, password);
         dbConnect = DATABASE.getDbConnect();
         this.numberOfItems = numberItems; //initializes the number of items needed in that order
         this.smallest =0; //initializing the smallest sum to zero

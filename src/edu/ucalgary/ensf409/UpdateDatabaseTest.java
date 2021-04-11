@@ -28,7 +28,7 @@ public class UpdateDatabaseTest {
     @Before
     public void addDeletedValuesBack() {
         InitializeConnection connection = new InitializeConnection();
-        connection.Initialize("jdbc:mysql://localhost/inventory", "scm", "ensf409");
+        connection.initialize("jdbc:mysql://localhost/inventory", "scm", "ensf409");
         try {
             String query = "INSERT INTO DESK (ID, Type, Legs, Top, Drawer, Price, ManuID) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement myStmt = connection.getDbConnect().prepareStatement(query);

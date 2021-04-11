@@ -1,6 +1,7 @@
 package edu.ucalgary.ensf409;
 
-import java.util.Scanner;
+import java.sql.*;
+import java.util.*;
 
 /**
  * This class is the User interface and calls the respective classes which are needed to create the order
@@ -17,9 +18,9 @@ public class OrderUserInterface {
     private TextFile text = new TextFile();
     private UpdateDatabase update;
     private OrderNotFulfilled orderN;
-    private String DBURL; //store the database url information
-    private String USERNAME; //store the user's account username
-    private String PASSWORD;
+    private String dburl; //store the database url information
+    private String username; //store the user's account username
+    private String password;
 
     /**
      * empty constructor
@@ -34,11 +35,11 @@ public class OrderUserInterface {
     public void startProgram(){
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Enter DataBase URL:  ");
-        DBURL = reader.nextLine(); // Scans the next token of the input as an int.
+        dburl = reader.nextLine(); // Scans the next token of the input as an int.
         System.out.println("Enter DataBase username:  ");
-        USERNAME= reader.nextLine(); // Scans the next token of the input as an int.
+        username= reader.nextLine(); // Scans the next token of the input as an int.
         System.out.println("Enter DataBase password:  ");
-        PASSWORD = reader.nextLine(); // Scans the next token of the input as an int.  //        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        password = reader.nextLine(); // Scans the next token of the input as an int.  //        Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Enter furniture category:  ");
         setFurnitureCategory(reader.nextLine()); //Scans the next token of the input as a String
 
@@ -254,7 +255,7 @@ public class OrderUserInterface {
      */
 
     public String getDburl() {
-        return DBURL;
+        return dburl;
     }
 
     /**
@@ -262,13 +263,13 @@ public class OrderUserInterface {
      * @return
      */
     public String getUsername() {
-        return USERNAME;
+        return username;
     }
     /**
      * getter function for database password
      * @return
      */
     public String getPassword() {
-        return PASSWORD;
+        return password;
     }
 }

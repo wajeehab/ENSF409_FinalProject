@@ -14,7 +14,7 @@ public class InitializeConnectionTest {
     @Test
     public void InitializeTest() {
         InitializeConnection newInitializeConnection = new InitializeConnection();
-        newInitializeConnection.Initialize("jdbc:mysql://localhost/inventory", "scm", "ensf409");
+        newInitializeConnection.initialize("jdbc:mysql://localhost/inventory", "scm", "ensf409");
         Connection newConnect = newInitializeConnection.getDbConnect();
         ResultSet results;
         String[] results2 = new String[5];

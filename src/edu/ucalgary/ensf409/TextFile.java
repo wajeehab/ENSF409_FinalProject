@@ -1,6 +1,6 @@
 package edu.ucalgary.ensf409;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.*;
 
 /**

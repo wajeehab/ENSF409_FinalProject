@@ -16,7 +16,7 @@ public class InitializeConnection { //******************** CHANGE DBCONNECT*****
     /**
      * this method takes in the url, user and password for the database and initializes the connection
      */
-    public void Initialize(String url, String user, String password) {
+    public void initialize(String url, String user, String password) {
         try{
             dbConnect = DriverManager.getConnection(url, user,password); //predefined information for the database as per project specifications
         } catch (SQLException e) {

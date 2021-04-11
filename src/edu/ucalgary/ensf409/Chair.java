@@ -17,11 +17,6 @@ public class Chair {
     private ArrayList<ArrayList<String>> combinations = new ArrayList<>();
     private ArrayList<ArrayList<String>> price = new ArrayList<>();
     private ResultSet results;
-
-    public Connection getDbConnect() {
-        return dbConnect;
-    }
-
     private Connection dbConnect;
     private int smallest;
     private boolean isEmpty;
@@ -36,7 +31,7 @@ public class Chair {
      * @param numberItems - the  number of items required in the order
      */
     public Chair(int numberItems, String url, String user, String password) {
-        DATABASE.Initialize(url, user, password);
+        DATABASE.initialize(url, user, password);
         dbConnect = DATABASE.getDbConnect();
         this.numberOfItems = numberItems; //initializes the number of items needed in that order
         this.smallest = 0; //initializing the smallest sum to zero
@@ -361,5 +356,13 @@ public class Chair {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * getter method used for testing
+     *
+     * @return Connection
+     */
+    public Connection getDbConnect() {
+        return dbConnect;
     }
 }
